@@ -1,0 +1,70 @@
+<mat-card *ngIf="hasImage==='true' && !bigCard"
+		  class="card">
+	<div *ngIf="icon!==''"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="start center">
+		<!-- <div [fxFlex]="imgHeight"> -->
+		<img height="30"
+			 class="image"
+			 src="assets/images/{{icon}}">
+		<!-- </div> -->
+	</div>
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="space-between center"
+		 fxLayoutGap="5px">
+		<div fxFlex
+			 class="heading">
+			<div [style.color]='colortype'
+				 class='heading'>
+				{{heading}}
+			</div>
+		</div>
+		<div [style.color]='colortype'
+			 class="number">
+			{{count}}
+		</div>
+
+	</div>
+</mat-card>
+
+<mat-card *ngIf="hasImage==='false' && !bigCard"
+		  class="card">
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="start center">
+
+		<div style=" color: black;"
+			 class='heading'>
+			{{heading}}
+		</div>
+	</div>
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="space-between center"
+		 fxLayoutGap="5px">
+		<div fxFlex
+			 class="heading">
+			<div style="margin-top: 25px;"
+				 class='heading'>
+				{{info}}
+			</div>
+		</div>
+	</div>
+</mat-card>
+
+<mat-card *ngIf="bigCard"
+		  class="card" >
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="space-between center"
+		 fxLayoutGap="5px" style="min-height: 40px;">
+		<div fxFlex
+			 class="heading">
+			<div [style.color]='colortype'
+				 class='heading'>
+				{{heading}}
+			</div>
+		</div>
+		<div [style.color]='colortype'
+			 class="number">
+			{{count}}
+		</div>
+	</div>
+</mat-card>

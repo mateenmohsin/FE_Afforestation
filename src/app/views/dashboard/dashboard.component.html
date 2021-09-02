@@ -1,0 +1,196 @@
+<app-top-heading [title]="'Dashboard'"></app-top-heading>
+<div fxLayout="row wrap"
+     fxLayoutAlign="space-between stretch"
+     fxLayoutAlign.sm="space-between start"
+     fxLayoutAlign.xs="space-between start">
+
+    <mat-card style="padding: 15px;"
+              fxFlex.xl="28"
+              fxFlex.lg="28"
+              fxFlex.xl="28"
+              fxFlex.sm="100"
+              fxFlex.xs="100"
+              fxLayout="row wrap"
+              fxLayoutAlign="space-between start">
+        <div fxFlex="100"
+             style="padding-bottom: 10px;">
+            Success Ratio
+        </div>
+        <div fxFlex="50">
+            <app-chart chartType="circle"
+                       circleChartText="Seeds"
+                       [circleChartValue]="successRatio?.seed"
+                       [circleChartClass]="successRatioClass?.seed"
+                       circleChartColor="#242F68"></app-chart>
+        </div>
+        <div fxFlex="50">
+            <app-chart chartType="circle"
+                       circleChartText="Cuttings"
+                       [circleChartValue]="successRatio?.cutting"
+                       [circleChartClass]="successRatioClass?.cutting"
+                       circleChartColor="#C7E4FF"></app-chart>
+        </div>
+    </mat-card>
+
+    <div fxFlex.xl="71"
+         fxFlex.lg="71"
+         fxFlex.xl="71"
+         fxFlex.sm="100"
+         fxFlex.xs="100">
+        <div fxLayout="row wrap"
+             fxLayoutAlign="start center"
+             fxLayoutGap="10px"
+             fxLayoutGap.sm=""
+             fxLayoutGap.xs="">
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalNurseries"
+                      [hasImage]="'true'"
+                      [heading]="'Total Nurseries'"
+                      [icon]="'ic_nurseries.png'"
+                      [colortype]="'#2C77FF'"
+                      [imgHeight]="'45px'">
+
+                </card>
+            </div>
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalSpecies"
+                      [hasImage]="'true'"
+                      [heading]="'Total Species'"
+                      [icon]="'ic_sapling_b.png'"
+                      [colortype]="'#242F68'"
+                      [imgHeight]="'45px'">
+
+                </card>
+            </div>
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalGardeners"
+                      [hasImage]="'true'"
+                      [heading]="'Total Gardeners'"
+                      [icon]="'ic_gardeners.png'"
+                      [colortype]="'#2C77FF'"
+                      [imgHeight]="'45px'">
+
+                </card>
+            </div>
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalHeadGardeners"
+                      [hasImage]="'true'"
+                      [heading]="'Total Head Gardeners'"
+                      [icon]="'ic_headgardeners.png'"
+                      [colortype]="'#242F68'"
+                      [imgHeight]="'45px'">
+                </card>
+            </div>
+        </div>
+        <div style="margin-top: 10px;"
+             fxLayout="row wrap"
+             fxLayoutAlign="start center"
+             fxLayoutGap="10px"
+             fxLayoutGap.sm=""
+             fxLayoutGap.xs="">
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalSamplingApprovedRequests"
+                      [hasImage]="'true'"
+                      [heading]="'Processed Requests'"
+                      [icon]="'ic_processed.png'"
+                      [colortype]="'#242F68'"
+                      [imgHeight]="'45px'">
+
+                </card>
+            </div>
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalSamplingPendingRequests"
+                      [hasImage]="'true'"
+                      [heading]="'Pending Requests'"
+                      [icon]="'ic_pending.png'"
+                      [colortype]="'#2C77FF'"
+                      [imgHeight]="'45px'">
+
+                </card>
+            </div>
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalSamplingCancelledRequests"
+                      [hasImage]="'true'"
+                      [heading]="'Canceled Requests'"
+                      [icon]="'ic_cancelled.png'"
+                      [colortype]="'#242F68'"
+                      [imgHeight]="'45px'">
+
+                </card>
+            </div>
+            <div fxFlex.xl="calc(20% - 10px)"
+                 fxFlex.lg="calc(20% - 10px)"
+                 fxFlex.md="calc(20% - 10px)"
+                 fxFlex.sm="48"
+                 fxFlex.xs="100">
+                <card [count]="drashboardKpi?.totalSamplingRejectedRequests"
+                      [hasImage]="'true'"
+                      [heading]="'Rejected Requests'"
+                      [icon]="'ic_rejected.png'"
+                      [colortype]="'#2C77FF'"
+                      [imgHeight]="'45px'">
+                </card>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 30px;"
+     fxLayout="row wrap"
+     fxLayoutAlign="space-between center">
+    <div fxFlex="30"
+         fxFlex.sm="100"
+         fxFlex.xs="100">
+        <div style="font-size: 20px;font-weight: bold;margin-bottom: 10px;">Species Availability & Demand Comparison
+        </div>
+    </div>
+    <div fxFlex
+         fxFlex.sm="100"
+         fxFlex.xs="100"
+         fxLayout="row wrap"
+         fxLayoutAlign="end center">
+        <filter-control [storage]="[{get: 'nurseries', at: 0}, {get: 'species', at: 1}]"
+                        (filnalFilters)="filnalFilters($event)"
+                        [hasDatePicker]="true"
+                        [filterArray]="filterArray"></filter-control>
+    </div>
+    <!-- <div fxFlex="25">
+        <date-range (onDateRange)="onDateRange($event)"></date-range>
+    </div> -->
+
+    <mat-card fxFlex="calc(100% - 5px)">
+        <app-chart *ngIf="dataLoaded"
+                   chartType="column"
+                   chartText="Total Sales"
+                   [columnChart]="columnChart"
+                   chartContainer="C"></app-chart>
+    </mat-card>
+
+</div>

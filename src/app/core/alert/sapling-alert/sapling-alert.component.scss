@@ -1,0 +1,41 @@
+th {
+    font-size: 14px;
+    border: 1px solid;
+    background: #2B3B89;
+    color: white;
+    font-size: 12px;
+    font-family: "Montserrat";
+    font-weight: 100;
+}
+
+td {
+    text-align: center;
+    padding: 3px 10px;
+    border-right: 1px solid;
+    border-left: 1px solid;
+    font-family: 'Montserrat';
+    font-size: 12px;
+
+}
+
+tr {}
+
+.data-table {
+    max-width: 100%;
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    table {
+        border-collapse: collapse;
+        border-color: #ffffff;
+        width: calc(100% - 1px);
+        border: 1px solid;
+    }
+}
+
+.approveInput {
+    font-family: 'Montserrat';
+    font-size: 12px;
+    font-weight: 100;
+}

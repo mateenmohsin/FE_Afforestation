@@ -1,0 +1,17 @@
+<app-top-heading [title]="title"></app-top-heading>
+
+
+<mat-card>
+    <div fxLayout="row wrap"
+         fxLayoutGap="30px"
+         fxLayoutAlign="end center">
+
+        <filter-control (filnalFilters)="filnalFilters($event)"
+                        [builtInFilters]="{key: 'typeEn', value: 'contractedOrganization'}"
+                        [filterArray]="filterArray"></filter-control>
+    </div>
+
+    <app-table-component (onPagination)="onPagination($event)"
+                         (selectedItem)="processSamplingReq($event)"
+                         [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

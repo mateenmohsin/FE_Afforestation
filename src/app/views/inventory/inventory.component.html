@@ -1,0 +1,34 @@
+<app-top-table-header [props]="tableHeaderProps"></app-top-table-header>
+
+<mat-card style="margin-bottom: 30px;">
+    <div fxLayout="row wrap"
+         fxLayoutGap="30px"
+         fxLayoutAlign="start center">
+
+        <filter-control [storage]="[{get: 'nurseries', at: 0}, {get: 'species', at: 1}]"
+                        (filnalFilters)="filnalFilters($event)"
+                        [builtInFilters]="filterSapling"
+                        [filterArray]="filterArray"></filter-control>
+
+    </div>
+
+    <app-table-component (onPagination)="onPagination($event)"
+                         (onRowAction)="onRowAction($event)"
+                         (status)="statusChanged($event,'consumable-inventory')"
+                         [props]="tableConfigAndProps"></app-table-component>
+</mat-card>
+<app-top-table-header [props]="tableHeaderProps1"></app-top-table-header>
+<mat-card>
+    <div fxLayout="row wrap"
+         fxLayoutGap="30px"
+         fxLayoutAlign="start center">
+
+        <filter-control [storage]="[{get: 'nurseries', at: 0}]"
+                        (filnalFilters)="filnalFilters2($event)"
+                        [builtInFilters]="filterFixed"
+                        [filterArray]="filterArray1"></filter-control>
+    </div>
+
+    <app-table-component (onPagination)="onPagination1($event)"
+                         [props]="myProps1"></app-table-component>
+</mat-card>

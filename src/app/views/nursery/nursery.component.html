@@ -1,0 +1,13 @@
+<ng-container *ngIf="greenerUser?.user?.role != 'admin'">
+    <app-top-table-header [props]="tableHeaderProps"></app-top-table-header>
+</ng-container>
+
+<ng-container *ngIf="greenerUser?.user?.role == 'admin'">
+    <app-top-heading [title]="'Nursery Listing'"></app-top-heading>
+</ng-container>
+
+<mat-card>
+    <app-table-component (onPagination)="onPagination($event)"
+                         (status)="statusChanged($event,'nursery')"
+                         [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

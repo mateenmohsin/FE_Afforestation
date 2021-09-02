@@ -1,0 +1,156 @@
+<app-top-heading [title]="'Reports'"></app-top-heading>
+
+<mat-card style="padding: 25px !important;">
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="end center"
+		 fxLayoutGap="5px">
+		<div style="font-weight: bold;padding-bottom: 30px;"
+			 fxFlex>
+			Customer Request Report
+		</div>
+	</div>
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="space-between center"
+		 fxLayoutGap="15px">
+		<div fxFlex="25">
+			<date-range (onDateRange)="onDateRange($event, 'customer')"></date-range>
+		</div>
+		<div fxFlex="17">
+			<mat-form-field fxFlex>
+				<mat-label>Select Nursery</mat-label>
+				<mat-select [(ngModel)]="customerNursery">
+					<mat-option [value]="{id: -1, nameEn: 'All Nurseries'}">All</mat-option>
+					<mat-option *ngFor="let option of nurseries"
+								[value]="option">
+						{{option?.nameEn}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div fxFlex="17">
+			<mat-form-field fxFlex>
+				<mat-label>Request Type</mat-label>
+				<mat-select [(ngModel)]="customerRequestType">
+					<mat-option value="All">All</mat-option>
+					<mat-option value="individual">Individual</mat-option>
+					<mat-option value="contractedOrganization">Contracted Organisation</mat-option>
+					<mat-option value="nonContractedOrganization">Not Contracted Organisation</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div fxFlex="17">
+			<mat-form-field fxFlex>
+				<mat-label>Status</mat-label>
+				<mat-select [(ngModel)]="customerStatus">
+					<mat-option value="All">All</mat-option>
+					<mat-option value="pending">Pending</mat-option>
+					<mat-option value="approved">Approved</mat-option>
+					<mat-option value="partaillyApproved">Partially Approved</mat-option>
+					<mat-option value="rejected">Rejected</mat-option>
+					<mat-option value="cancelled">Cancelled</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div fxFlex style="text-align: right;">
+			<button (click)="onGenerateReport('customer')"
+					type="submit"
+					mat-button
+					style="margin-bottom: 12px;"
+					class="btn-custom-form">Generate</button>
+		</div>
+	</div>
+</mat-card>
+
+<mat-card style="margin-top: 20px;padding: 25px !important;">
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="end center"
+		 fxLayoutGap="5px">
+		<div style="font-weight: bold;padding-bottom: 20px;"
+			 fxFlex>
+			Attendance Report
+		</div>
+	</div>
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="space-between center"
+		 fxLayoutGap="15px">
+		<div fxFlex="25">
+			<date-range (onDateRange)="onDateRange($event, 'attendance')"></date-range>
+		</div>
+		<div fxFlex="22">
+			<mat-form-field fxFlex>
+				<mat-label>Select Nursery</mat-label>
+				<mat-select [(ngModel)]="attendanceNursery">
+					<mat-option *ngFor="let option of nurseries"
+								[value]="option">
+						{{option?.nameEn}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div fxFlex="22">
+			<mat-form-field fxFlex>
+				<mat-label>Attendance</mat-label>
+				<mat-select [(ngModel)]="attendance">
+					<mat-option value="All">All</mat-option>
+					<mat-option value="absent">Absent</mat-option>
+					<mat-option value="present">Present</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div fxFlex></div>
+		<div fxFlex="150px">
+			<button (click)="onGenerateReport('attendance')"
+					type="submit"
+					mat-button
+					style="margin-bottom: 12px;"
+					class="btn-custom-form">Generate</button>
+		</div>
+	</div>
+</mat-card>
+
+<mat-card style="margin-top: 20px;padding: 25px !important;">
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="end center"
+		 fxLayoutGap="5px">
+		<div style="font-weight: bold;padding-bottom: 20px;"
+			 fxFlex>
+			Inventory Report
+		</div>
+	</div>
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="space-between center"
+		 fxLayoutGap="15px">
+		<div fxFlex="25">
+			<date-range (onDateRange)="onDateRange($event, 'inventory')"></date-range>
+		</div>
+		<div fxFlex="22">
+			<mat-form-field fxFlex>
+				<mat-label>Select Nursery</mat-label>
+				<mat-select [(ngModel)]="inventoryNursery">
+					<mat-option *ngFor="let option of nurseries"
+								[value]="option">
+						{{option?.nameEn}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div fxFlex="22">
+			<mat-form-field fxFlex>
+				<mat-label>Inventory Type</mat-label>
+				<mat-select [(ngModel)]="inventoryType">
+					<mat-option value="consumable">Consumable</mat-option>
+					<mat-option value="fixed">Fixed</mat-option>
+					
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div fxFlex></div>
+		<div fxFlex="150px">
+			<button (click)="onGenerateReport('inventory')"
+					type="submit"
+					mat-button
+					style="margin-bottom: 12px;"
+					class="btn-custom-form">Generate</button>
+		</div>
+	</div>
+</mat-card>

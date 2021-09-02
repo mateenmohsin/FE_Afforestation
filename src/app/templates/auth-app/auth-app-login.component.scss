@@ -1,0 +1,55 @@
+.top-div {
+
+    background-position: center;
+
+    background-size: cover;
+    overflow: auto;
+
+}
+
+img {
+    border-radius: 0px;
+}
+
+form-div {
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logoImage {
+    margin-bottom: 20px;
+    width: 200px;
+}
+
+.lighter-text {
+    font-size: 12px;
+    color: black;
+    text-align: center;
+}
+
+.bold-text {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+
+}
+
+.bolder-text {
+    font-size: 30px;
+    color: rgb(50 58 101);
+    text-align: center;
+
+}
+
+label {
+    color: #fff;
+}
+
+
+
+
+input-field {
+    width: 100%;
+}

@@ -1,0 +1,22 @@
+<div fxLayout="row wrap"
+     fxLayoutAlign="end center"
+     fxLayoutGap="5px"
+     style="margin-top: 15px;height:100px">
+     
+    <div fxFlex="150px"
+         *ngIf="activated">
+        <button type="submit"
+                mat-button
+                class="btn-custom-form">
+            {{save}}
+        </button>
+    </div>
+    <div fxFlex="150px">
+        <button type="button"
+                mat-button
+                (click)="goBack()"
+                class="btn-custom-form">
+            {{cancel}}
+        </button>
+    </div>
+</div>

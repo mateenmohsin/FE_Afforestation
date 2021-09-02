@@ -1,0 +1,59 @@
+<div class="mt-80">
+    <mat-sidenav-container fxFlexFill>
+        <mat-sidenav [mode]="mode"
+                     [opened]="openSidenav"
+                     fxFlex.xl="230px"
+                     fxFlex.lg="230px"
+                     fxFlex.md="270px"
+                     fxFlex.sm="270px"
+                     fxFlex.xs="250px"
+                     #sidenav>
+            <app-side-panel [mode]="mode"
+                            [sideMenuOpened]="openSidenav"
+                            (onManageMenu)="onManageMenu($event)"></app-side-panel>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlex>
+            <div style="height: 60px;background: #0D1E5C 0% 0% no-repeat padding-box;box-shadow: 0px 3px 6px #00000036;border-bottom: 1px solid white;"
+                 fxLayout="row wrap"
+                 fxLayoutAlign="space-between center">
+                <div>
+                    <button mat-icon-button
+                            (click)="onManageMenu()">
+                        <mat-icon style="color: white;"
+                                  class="mat-18">subject</mat-icon>
+                    </button>
+                </div>
+                <div class="main-logo-text">Afforestation Portal</div>
+                <div style=" margin-right: 20px;">
+                    <div style="height: 40px;background: white;border-radius: 25px;width: 100%;"
+                         fxLayout="row wrap"
+                         fxLayoutAlign="space-between center">
+                        <div fxFlex="45px">
+                            <img [src]="greenerUser?.user?.profilePicture"
+                                 style="border-radius: 25px;margin-top: 8px;margin-left: 5px;"
+                                 width="35"
+                                 height="35">
+                        </div>
+                        <div fxFlex
+                             style="margin-right: 10px;">
+                            <button mat-button
+                                    style="padding: 0;"
+                                    [matMenuTriggerFor]="menu">{{greenerUser?.user?.name}}</button>
+                            <mat-menu #menu="matMenu">
+                                <button (click)="onProfile()" mat-menu-item>Profile Setting</button>
+                                <button (click)="logOut()"
+                                        mat-menu-item>Sign Out</button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-layout"
+                 style="background-image: url(assets/images/bg.png);    background-repeat: no-repeat;
+                 background-size: cover;    background-position: 0 100px;">
+                <router-outlet></router-outlet>
+                <div style="height: 30px;"></div>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

@@ -1,0 +1,42 @@
+<div style="width: 500px;">
+     <div style="font-size: 24px;text-align: center;color: #111e6c;">{{alertData.heading}}</div>
+
+     <div [innerHTML]="alertData.message"
+          style="font-size: 13px;color: #666666;text-align: center;margin-top: 20px;padding: 0 30px;">
+     </div>
+     <!-- <div *ngIf="showLoading" style="text-align: center">
+        <img *ngIf="isLoading"width="50"height="50"src="assets/images/view-loader.gif">
+     </div> -->
+     <div fxLayout="row wrap"
+          fxLayoutAlign="space-evenly start"
+          fxLayoutGap="20px"
+          style="text-align: right;margin-top: 20px;">
+        
+                    <textarea *ngIf="alertData.hasInput == true"
+                    [disabled]="isLoading"
+                    style="height: 100px; width: 400px;font-size: 20px;"  
+                    [(ngModel)]="reasonTExt ">
+                    </textarea>
+     </div>       
+        
+ <div    fxLayout="row wrap"
+          fxLayoutAlign="space-evenly start"
+          fxLayoutGap="20px"
+          style="text-align: right;margin-top: 20px;">
+                 <button [ngClass]="alertData.leftButton.class"
+                  mat-button
+                  [disabled]="isLoading"
+                  type="button"
+                  (click)="onCancelClick()">{{alertData.leftButton.text}}</button>
+
+          <button [ngClass]="alertData.rightButton.class"
+                  mat-button
+                  *ngIf="alertData.type == 'ask'"
+                  [disabled]="isLoading"
+                  type="button"
+                  (click)="onSubmitClick()">{{alertData.rightButton.text}}</button>
+      
+        
+
+     </div>
+</div>

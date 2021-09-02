@@ -1,0 +1,19 @@
+<app-top-table-header [props]="tableHeaderProps"></app-top-table-header>
+
+<mat-card>
+    <div fxLayout="row wrap"
+         fxLayoutGap="30px"
+         fxLayoutAlign="end center">
+        <!-- <filter-control [placeholder]="'Sort by name'">
+        </filter-control>
+        <filter-control [placeholder]="'Filter by Status'">
+        </filter-control> -->
+        <filter-control (filnalFilters)="filnalFilters($event)"
+                        [hasSearch]="true"
+                        [searchConfig]="{label: 'Search by Name', key: 'nameEn', value: ''}"
+                        [filterArray]="filterArray"></filter-control>
+    </div>
+
+    <app-table-component (onPagination)="onPagination($event)" (status)="statusChanged($event,'admin')"
+                         [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

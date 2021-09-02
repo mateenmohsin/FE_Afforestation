@@ -1,0 +1,106 @@
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()" >
+	  <!-- [style.fontSize.px]="'10'" -->
+	<app-top-heading [title]="title"></app-top-heading>
+
+	<mat-card class="p-30"
+			  fxLayout="row wrap"
+			  fxLayoutAlign="start center">
+		<div fxFlex.xl="70"
+			 fxFlex.lg="70"
+			 fxFlex.md="70"
+			 fxFlex.sm="100"
+			 fxFlex.xs="100"
+			 fxLayout="row wrap"
+			 fxLayoutAlign="space-between center">
+			<div fxFlex="48">
+				<mat-form-field >
+					<mat-label>Nursery Name</mat-label>
+					<input matInput
+						   formControlName="nameEn"
+						   required
+						   #nameEn
+						   minlength="3"
+						   maxlength="42"
+						   type="text">
+					<mat-error *ngIf="getField('nameEn')">{{getErrorMessage('nameEn')}}</mat-error>
+					<!-- <mat-hint align="end">{{nameEn.value?.length || 0}}/42</mat-hint> -->
+				</mat-form-field>
+			</div>
+			<div fxFlex="48"
+				 class="input-rtl"
+				 dir="rtl">
+				<mat-form-field >
+					<mat-label>نرسری کا نام</mat-label>
+					<input matInput
+						   formControlName="nameUr"
+						   required
+						   #nameUr
+						   minlength="3"
+						   maxlength="42"
+						   type="text">
+					<mat-error *ngIf="getField('nameUr')">{{getErrorMessage('nameUr')}}</mat-error>
+					<!-- <mat-hint align="end">{{nameUr.value?.length || 0}}/42</mat-hint> -->
+				</mat-form-field>
+			</div>
+			<div fxFlex="100"
+				 class="row-wrap-margins">
+				<mat-form-field >
+					<mat-label>Address</mat-label>
+					<input matInput
+						   formControlName="address"
+						   required
+						   #address
+						   minlength="3"
+						   maxlength="60"
+						   type="text">
+					<mat-error *ngIf="getField('address')">{{getErrorMessage('address')}}</mat-error>
+					<!-- <mat-hint align="end">{{address.value?.length || 0}}/60</mat-hint> -->
+				</mat-form-field>
+			</div>
+			<div fxFlex="48"
+				 class="row-wrap-margins">
+				<mat-form-field >
+					<mat-label>Covered Area</mat-label>
+					<input matInput
+						   formControlName="coveredArea"
+						   #coveredArea
+						   minlength="2"
+						   maxlength="6"
+						   type="text">
+					<mat-error *ngIf="getField('coveredArea')">{{getErrorMessage('coveredArea')}}</mat-error>
+					<!-- <mat-hint align="end">{{coveredArea.value?.length || 0}}/6</mat-hint> -->
+				</mat-form-field>
+			</div>
+			<div fxFlex="48"
+				 class="row-wrap-margins">
+				<mat-form-field >
+					<mat-label>Capacity</mat-label>
+					<input matInput
+						   formControlName="capacity"
+						   #coveredArea
+						   minlength="2"
+						   maxlength="7"
+						   type="text">
+					<mat-error *ngIf="getField('capacity')">{{getErrorMessage('capacity')}}</mat-error>
+					<!-- <mat-hint align="end">{{coveredArea.value?.length || 0}}/7</mat-hint> -->
+				</mat-form-field>
+			</div>
+			<!-- <div fxFlex="48" class="row-wrap-margins">
+				<mat-form-field fxFlex>
+					<mat-label>Head Gardener</mat-label>
+					<mat-select style="height:40px !important"
+								formControlName="gardenerId">
+						<mat-option *ngFor="let hG of headGardeners"
+									[value]="hG.id">{{hG.nameEn}}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="getField('gardenerId')">{{getErrorMessage('gardenerId')}}</mat-error>
+				</mat-form-field>
+			</div> -->
+		</div>
+		<div fxFlex></div>
+	</mat-card>
+
+	<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+
+</form>

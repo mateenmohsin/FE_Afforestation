@@ -1,0 +1,36 @@
+<form [formGroup]="Form">
+    <mat-form-field>
+        <mat-label>Select Date Range</mat-label>
+        <mat-date-range-input [max]="currentDate"
+                              (click)="FormPicker.open()"
+                              [rangePicker]="FormPicker">
+            <input matStartDate
+                   readonly
+                   (dateChange)="valueChanged()"
+                   placeholder="Start date"
+                   formControlName="start">
+            <input matEndDate
+                   readonly
+                   (dateChange)="valueChanged()"
+                   placeholder="End date"
+                   formControlName="end">
+        </mat-date-range-input>
+        <mat-icon *ngIf="Form.get('start').value && Form.get('end').value"
+                  matSuffix
+                  (click)="onClear()">close</mat-icon>
+        <mat-datepicker-toggle matPrefix
+                               [for]="FormPicker"></mat-datepicker-toggle>
+        <mat-date-range-picker (closed)="onClosed()"
+                               #FormPicker></mat-date-range-picker>
+        <!-- <mat-date-range-picker #FormPicker>
+            <mat-date-range-picker-actions>
+                <button mat-button
+                        matDateRangePickerCancel>Cancel</button>
+                <button mat-raised-button
+                        color="primary"
+                        matDateRangePickerApply
+                        (click)="valueChanged()">Apply</button>
+            </mat-date-range-picker-actions>
+        </mat-date-range-picker> -->
+    </mat-form-field>
+</form>

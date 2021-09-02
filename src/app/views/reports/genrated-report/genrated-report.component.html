@@ -1,0 +1,127 @@
+<app-top-heading [showBack1]="true"
+                 [title]="'Reports'"> </app-top-heading>
+
+<mat-card>
+     <div style="padding: 10px 40px 40px 40px;">
+          <div fxLayout="row wrap"
+               fxLayoutAlign="space-between center"
+               style="margin-bottom: 20px">
+               <div fxFlex="100"
+                    class="top-heading"
+                    style="font-size: 18px;font-weight: bold;">
+                    <span class="header-top-text-bolder">
+                         Customer Request Report
+                    </span>
+               </div>
+               <div>
+                    {{reportData?.nurseryName}}&nbsp;&nbsp;&nbsp;&nbsp; 
+                    {{(reportData?.date?.startDateTime * 1000) | date: 'dd/MM/yyyy'}} -
+                    {{(reportData?.date?.endDateTime * 1000) | date: 'dd/MM/yyyy'}}
+               </div>
+          </div>
+          <div fxLayout="row wrap"
+               fxLayoutAlign="space-between center">
+               <div fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+                    <card [count]="customerReportKpi?.totalRequests"
+                          [bigCard]="true"
+                          [heading]="'Total Requests'"
+                          [colortype]="'#2C77FF'">
+
+                    </card>
+               </div>
+               <div fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+                    <card [count]="customerReportKpi?.saplingsDistributed"
+                          [bigCard]="true"
+                          [heading]="'Sapling Distributed'"
+                          [colortype]="'#242F68'">
+
+                    </card>
+               </div>
+               <div fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+                    <card [count]="customerReportKpi?.requestDailyAverage"
+                          [bigCard]="true"
+                          [heading]="'Request Daily Average '"
+                          [colortype]="'#2C77FF'">
+
+                    </card>
+               </div>
+               <div fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+                    <card [count]="customerReportKpi?.saplingsDailyAverage"
+                          [bigCard]="true"
+                          [heading]="'Sapling Daily Average '"
+                          [colortype]="'#242F68'">
+                    </card>
+               </div>
+          </div>
+          <div style="margin-top: 10px;"
+               fxLayout="row wrap"
+               fxLayoutAlign="start center"
+               fxLayoutGap="10px">
+               <div *ngIf="reportData.requestType == 'All'"
+                    fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+                    <card [count]="customerReportKpi?.individualSaplingsRequest"
+                          [bigCard]="true"
+                          [heading]="'Individual Customers'"
+                          [colortype]="'#242F68'">
+
+                    </card>
+               </div>
+               <div *ngIf="reportData.requestType == 'All'"
+                    fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+                    <card [count]="customerReportKpi?.contractedOrganizationsSaplingsRequest"
+                          [bigCard]="true"
+                          [heading]="'Organizations (Contract)'"
+                          [colortype]="'#2C77FF'">
+
+                    </card>
+               </div>
+               <div *ngIf="reportData.requestType == 'All'"
+                    fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+                    <card [count]="customerReportKpi?.nonContractedOrganizationsSaplingsRequest"
+                          [bigCard]="true"
+                          [heading]="'Organizations (Non Contract)'"
+                          [colortype]="'#242F68'">
+
+                    </card>
+               </div>
+               <div fxFlex.xl="24"
+                    fxFlex.lg="24"
+                    fxFlex.md="49"
+                    fxFlex.sm="100"
+                    fxFlex.xs="100">
+
+               </div>
+          </div>
+     </div>
+
+     <app-table-component (onPagination)="onPagination($event)"
+                          [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

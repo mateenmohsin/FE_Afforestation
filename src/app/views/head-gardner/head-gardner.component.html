@@ -1,0 +1,19 @@
+<app-top-table-header [props]="tableHeaderProps"></app-top-table-header>
+
+<mat-card>
+  <div fxLayout="row wrap"
+       fxLayoutGap="30px"
+       fxLayoutAlign="start center">
+
+    <filter-control [storage]="[{get: 'nurseries', at: 0}]"
+                    (filnalFilters)="filnalFilters($event)"
+                    [hasSearch]="true"
+                    [searchConfig]="{label: 'Search by Name', key: 'nameEn', value: ''}"
+                    [builtInFilters]="{key: 'role', value: 'headGardener'}"
+                    [filterArray]="filterArray"></filter-control>
+  </div>
+
+  <app-table-component (onPagination)="onPagination($event)" (status)="statusChanged($event,'gardener')"
+                       [props]="tableConfigAndProps"></app-table-component>
+
+</mat-card>

@@ -1,0 +1,17 @@
+<app-top-heading [title]="'Attendance Listing'"></app-top-heading>
+
+<mat-card>
+    <div fxLayout="row wrap"
+         fxLayoutGap="2px"
+         fxLayoutAlign="start center">
+
+        <filter-control [storage]="[{get: 'nurseries', at: 0}, {get: 'gardeners', at: 1}]"
+                        (filnalFilters)="filnalFilters($event)"
+                        [hasOnlyDate]="true"
+                        [filterArray]="filterArray"></filter-control>
+    </div>
+
+    <app-table-component (onPagination)="onPagination($event)"
+                         (onRowAction)="onRowAction($event)"
+                         [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

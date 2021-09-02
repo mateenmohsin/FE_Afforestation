@@ -1,0 +1,96 @@
+<mat-dialog-content style="max-height: 80vh;">
+<div style="max-width: 600px;">
+    <div style="font-size: 24px;color: #111e6c;">{{alertData.heading}} </div>
+
+
+    <div style="font-size: 150x ;margin-top:10px" *ngIf="!alertData.inputEditable && alertData.rightButton.text !=='Reject'">
+        Please specify the quantity of each species to partially approve the request below:
+    </div>
+
+    <div style="font-size: 150x ;margin-top:10px" *ngIf="alertData.inputEditable && alertData.rightButton.text !=='Reject'">
+        Please enter an optional comment and press the Approve button below to approve the full requested quantity of the saplings.
+    </div>
+
+    <div *ngIf="alertData.rightButton.text !='Reject'" 
+    fxLayout="row wrap"
+         fxLayoutAlign="start start"
+         fxLayoutGap="20px"
+         style="text-align: right;margin-top: 20px;">
+        <p style="font-weight: bold"> Request ID : {{alertData.dataToSubmit.id}} </p>
+    </div>
+
+    <div *ngIf="alertData.rightButton.text !='Reject'" 
+    fxLayout="row wrap"
+         fxLayoutAlign="start start"
+         fxLayoutGap="20px">
+        <p style="font-weight: bold"> Customer/Organisation: {{alertData.dataToSubmit.name}}
+            {{pinCode}} </p>
+    </div>
+
+    <div *ngIf="alertData.rightButton.text !='Reject'" 
+    fxLayout="row wrap"
+     style="margin-top: 15px;"
+     class="data-table">
+        <table style="width:100%">
+            <tr>
+                <th>No.</th>
+                <th style="width:100px ;">Species</th>
+                <th>Requested Quantity</th>
+                <th>Available Quantity</th>
+                <th>Approved Quantity</th>
+            </tr>
+            <tr *ngFor="let item of alertData.dataToSubmit.samplingRequestItems; let index">
+                <td>{{item.serialNumber}}</td>
+                <td>{{item.inventory.specie.nameEn}}</td>
+                <td>{{item.quantityRequested}}</td>
+                <td>{{item.inventory.quantity}}</td>
+                <td>
+                    <input style="width: 60%;text-align: center;padding: 5px;"
+                           type="text"
+                           (keyup)="item.quantityGiven=onApprovedKey(item.quantityGiven,item.quantityRequested,item.inventory.quantity)"
+                           mask="000000"
+                           [specialCharacters]="[]"
+                           [readonly]="alertData.inputEditable"
+                           class="approveInput"
+                           [(ngModel)]="item.quantityGiven" />
+                </td>
+
+            </tr>
+        </table>
+    </div>
+    <div fxLayout="row wrap"
+    style="margin-top: 15px;">
+        <textarea *ngIf="alertData.hasInput == true"
+                  placeholder="Comments (optional)"
+                  style="height: 100px; width: 600px;padding: 10px;"
+                  class="approveInput"
+                  [(ngModel)]="reasonTExt ">
+                   </textarea>
+    </div>
+
+    <div fxLayout="row wrap"
+     fxLayoutAlign="end center"
+     fxLayoutGap="5px"
+     style="margin-top: 15px;height:100px">
+     
+    <div fxFlex="150px">
+         <button 
+         mat-button
+         *ngIf="alertData.type == 'ask'"
+         class="btn-custom-form"
+         type="button"
+         (click)="onSubmitClick()">{{alertData.rightButton.text}}</button>
+
+    </div>
+    <div fxFlex="150px">
+        <button 
+        mat-button
+        type="button"
+        class="btn-custom-form"
+        (click)="onCancelClick()">{{alertData.leftButton.text}}</button>
+    </div>
+</div>
+</div>
+</mat-dialog-content>
+
+

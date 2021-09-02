@@ -1,0 +1,133 @@
+<app-top-heading [title]="title"></app-top-heading>
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+
+	<!-- //*ngIf="specieType == 'seed'" -->
+	<ng-container>
+		<mat-card class="p-30">
+			<file-picker [label]="label"
+						 [onlyImage]="onlyImage"
+						 [image]="getImage('image')"
+						 controlName="image"
+						 (onFileSelect)="onFileSelect($event)"
+						 (onDeleteFile)="onDeleteFile($event)">
+			</file-picker>
+
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="space-between center"
+				 
+				 class="row-wrap-margins">
+				<div fxFlex="100"
+					 *ngIf="showInput">
+					<mat-form-field fxFlex="24">
+						<mat-label>Species Id</mat-label>
+						<input matInput
+							   type="text"
+							   formControlName="id"
+							   [disabled]="disableInput"
+							   required
+							   placeholder="Sapling Id">
+						<mat-error *ngIf="getField('id')">{{getErrorMessage('id')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="24">
+					<mat-form-field class="row-wrap-margins">
+						<mat-label>Species Name</mat-label>
+						<input matInput
+							   type="text"
+							   formControlName="nameEn"
+							   minlength="4"
+							   maxlength="16"
+							   required>
+						<mat-error *ngIf="getField('nameEn')">{{getErrorMessage('nameEn')}}</mat-error>
+					</mat-form-field>
+				</div>
+
+				<div fxFlex="24"
+					 class="input-rtl"
+					 dir="rtl">
+					<mat-form-field class="row-wrap-margins">
+						<mat-label>پودے کا نام</mat-label>
+						<input matInput
+							   type="text"
+							   formControlName="nameUr"
+							   minlength="4"
+							   maxlength="16"
+							   required>
+						<mat-error *ngIf="getField('nameUr')">{{getErrorMessage('nameUr')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="24">
+					<mat-form-field class="row-wrap-margins">
+						<mat-label>Alternate Name</mat-label>
+						<input matInput
+							   type="text"
+							   formControlName="alternativeNameEn"
+							   minlength="4"
+							   maxlength="16"
+							   >
+						<mat-error *ngIf="getField('alternativeNameEn')">{{getErrorMessage('alternativeNameEn')}}
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="24"
+					 class="input-rtl"
+					 dir="rtl"
+					 >
+					<mat-form-field  class="row-wrap-margins">
+						<mat-label>متبادل نام</mat-label>
+						<input matInput
+							   type="text"
+							   formControlName="alternativeNameUr"
+							   minlength="4"
+							   maxlength="16"
+							   >
+						<mat-error *ngIf="getField('alternativeNameUr')">{{getErrorMessage('alternativeNameUr')}}
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="space-between start"
+				 class="row-wrap-margins">
+				<div fxFlex="24">
+
+					<mat-form-field>
+						<mat-label>Seed count/kg</mat-label>
+						<input matInput
+							   type="text"
+							   placeholder="Ex. 12"
+							   formControlName="seedCountPerKg"
+							   mask="999999"
+							   [specialCharacters]="[]"
+							   required>
+						<!-- <div style="left:2px;top: -2px;position: relative;"
+							 matSuffix>kg</div> -->
+						<mat-error *ngIf="getField('seedCountPerKg')">{{getErrorMessage('seedCountPerKg')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="24">
+					<mat-form-field>
+						<mat-label> Benchmark Success Ratio % </mat-label>
+						<input matInput
+							   type="text"
+							   mask="percent"
+							   [dropSpecialCharacters]="false"
+							   suffix="%"
+							   formControlName="benchmarkSuccessRatio"
+							   required>
+						<span matSuffix>{{quantityType}}</span>
+						<mat-error *ngIf="getField('benchmarkSuccessRatio')">{{getErrorMessage('benchmarkSuccessRatio')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="24">
+					
+				</div>
+				<div fxFlex="24">
+					
+				</div>
+			</div>
+		</mat-card>
+		<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+	</ng-container>
+</form>

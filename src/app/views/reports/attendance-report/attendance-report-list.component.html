@@ -1,0 +1,35 @@
+<div fxLayout="row wrap"
+     style="margin-bottom: 20px;"
+     fxLayoutAlign="space-between center">
+    <div fxFlex
+         class="top-heading"
+         style="font-weight: bold;">
+        <span class="header-top-text-bolder">
+            Attendance Listing
+        </span>
+    </div>
+    <div>
+        <div style="margin-bottom: 12px;" class="date-head">
+            {{reportData?.nurseryName}}
+            <!-- {{(reportData?.date?.startDateTime * 1000) | date: 'dd/MM/yyyy'}} -
+            {{(reportData?.date?.endDateTime * 1000) | date: 'dd/MM/yyyy'}} -->
+        </div>
+    </div>
+</div>
+<mat-card>
+    <div fxLayout="row wrap"
+         fxLayoutGap="2px"
+         fxLayoutAlign="start center">
+
+        <filter-control (filnalFilters)="filnalFilters($event)"
+                        [hasSearch]="true"
+                        [builtInFilters]="nurseryAttr"
+                        [storage]="[{get: 'gardeners', at: 0}]"
+                        [searchConfig]="{label: 'Search by Name', key: 'nameEn', value: ''}"
+                        [filterArray]="filterArray"></filter-control>
+    </div>
+
+    <app-table-component (onPagination)="onPagination($event)"
+                         (onRowAction)="onRowAction($event)"
+                         [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

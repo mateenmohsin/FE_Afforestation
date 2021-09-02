@@ -1,0 +1,16 @@
+<app-top-table-header [props]="tableHeaderProps"></app-top-table-header>
+
+<mat-card style="margin-bottom: 30px;">
+    <div fxLayout="row wrap"
+         fxLayoutGap="30px"
+         fxLayoutAlign="start center">
+
+        <filter-control (filnalFilters)="filnalFilters($event)"
+                        [hasSearch]="true"
+                        [searchConfig]="{label: 'Search by Name', key: 'nameEn', value: ''}"></filter-control>
+
+    </div>
+
+    <app-table-component (onPagination)="onPagination($event)"
+                         [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

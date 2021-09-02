@@ -1,0 +1,155 @@
+<div fxLayout="row wrap"
+     style="margin-bottom: 20px;"
+     fxLayoutAlign="space-between center">
+    <div fxFlex
+         class="top-heading"
+         style="font-weight: bold;">
+        <span class="header-top-text-bolder">
+            View Nursery
+        </span>
+    </div>
+    <div fxFlex="28">
+        <!-- <filter-control (filnalFilters)="filnalFilters($event)"
+                        [hasDatePicker]="true"></filter-control> -->
+    </div>
+</div>
+
+<div fxLayout="row wrap"
+     fxLayoutAlign="start center"
+     fxLayoutGap="10px"
+     fxLayoutGap.sm=""
+     fxLayoutGap.xs="">
+    <div fxFlex
+         fxFlex.sm="100"
+         fxFlex.xs="100">
+        <card [count]="nurseryKpi?.totalSamplingRequests"
+              [hasImage]="'true'"
+              [heading]="'Total Requests'"
+              [icon]="'ic_nurseries.png'"
+              [colortype]="'#2C77FF'"
+              [imgHeight]="'55px'">
+
+        </card>
+    </div>
+    <div fxFlex
+         fxFlex.sm="100"
+         fxFlex.xs="100">
+        <card [count]="nurseryKpi?.totalSamplingPendingRequests"
+              [hasImage]="'true'"
+              [heading]="'Pending Requests'"
+              [icon]="'ic_pending_d.png'"
+              [colortype]="'#242F68'"
+              [imgHeight]="'55px'">
+
+        </card>
+    </div>
+    <div fxFlex
+         fxFlex.sm="100"
+         fxFlex.xs="100">
+        <card [count]="nurseryKpi?.totalSamplingApprovedRequests"
+              [hasImage]="'true'"
+              [heading]="'Processed Requests'"
+              [icon]="'ic_processed_l.png'"
+              [colortype]="'#2C77FF'"
+              [imgHeight]="'55px'">
+
+        </card>
+    </div>
+    <div fxFlex
+         fxFlex.sm="100"
+         fxFlex.xs="100">
+        <card [count]="nurseryKpi?.totalSamplingRejectedRequests"
+              [hasImage]="'true'"
+              [heading]="' Rejected Requests'"
+              [icon]="'ic_rejected_d.png'"
+              [colortype]="'#242F68'"
+              [imgHeight]="'55px'">
+
+        </card>
+    </div>
+    <div fxFlex
+         fxFlex.sm="100"
+         fxFlex.xs="100">
+        <card [count]="nurseryKpi?.totalSpecies"
+              [hasImage]="'true'"
+              [heading]="' Total Species'"
+              [icon]="'ic_species_l.png'"
+              [colortype]="'#242F68'"
+              [imgHeight]="'55px'">
+
+        </card>
+    </div>
+</div>
+
+<mat-card style="margin-top: 20px;padding: 40px !important;">
+    <div fxLayout="row wrap"
+         fxLayoutAlign="start start">
+        <div fxFlex="25"
+             fxFlex.sm="100"
+             fxFlex.xs="100"
+             class='heading'>
+            <div class="nus-heading">
+                Nursery Name
+            </div>
+            <div class="nus-data">
+                {{nurseryData?.nameEn}}
+            </div>
+        </div>
+        <div fxFlex="25"
+             fxFlex.sm="100"
+             fxFlex.xs="100">
+            <div class="nus-heading"
+                 style="text-align: right;margin-right: 50px;">
+                اردو میں نام
+            </div>
+            <div class="nus-data"
+                 style="text-align: right;margin-right: 50px;">
+                {{nurseryData?.nameUr}}
+            </div>
+        </div>
+        <div fxFlex="25"
+             fxFlex.sm="100"
+             fxFlex.xs="100">
+            <div class="nus-heading">
+                Covered Area
+            </div>
+            <div class="nus-data">
+                {{nurseryData?.coveredArea}} sq.ft
+            </div>
+        </div>
+        <div fxFlex="25"
+             fxFlex.sm="100"
+             fxFlex.xs="100">
+            <div class="nus-heading">
+                Capacity
+            </div>
+            <div class="nus-data">
+                {{nurseryData?.capacity}}
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 30px;"
+         fxLayout="row wrap"
+         fxLayoutAlign="start start">
+        <div fxFlex="25"
+             fxFlex.sm="100"
+             fxFlex.xs="100">
+            <div class="nus-heading">
+                Head Gardener
+            </div>
+            <div style="margin-top: 15px;font-size: 20px; color: #3F487A;">
+                {{nurseryData?.headGardener ? nurseryData?.headGardener?.nameEn :'N/A' }}
+            </div>
+        </div>
+        <div fxFlex="75"
+             fxFlex.sm="100"
+             fxFlex.xs="100">
+            <div class="nus-heading">
+                Address
+            </div>
+            <div style="margin-top: 15px;font-size: 20px; color: #3F487A;">
+                {{nurseryData?.address}}
+            </div>
+        </div>
+    </div>
+</mat-card>

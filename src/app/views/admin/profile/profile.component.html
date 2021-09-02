@@ -1,0 +1,166 @@
+<div fxLayout="row wrap"
+	 style="margin-bottom: 20px;"
+	 fxLayoutAlign="space-between center">
+	<div fxFlex
+		 class="top-heading"
+		 style="font-weight: bold;">
+		<span class="header-top-text-bolder">
+			Profile
+		</span>
+	</div>
+	<div fxFlex="28">
+		<button class="header-button"
+				(click)="onChangePassword()"
+				mat-button>Change Password</button>
+	</div>
+</div>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="space-between center">
+		<div fxFlex>
+			<mat-card class="p-30">
+				<form [formGroup]="customForm">
+					<file-picker [label]="label"
+								 [onlyImage]="true"
+								 [image]="getImage('profilePicture')"
+								 controlName="profilePicture"
+								 (onFileSelect)="onFileSelect($event)"
+								 (onDeleteFile)="onDeleteFile($event)">
+					</file-picker>
+
+					<div fxLayout="row wrap"
+						 fxLayoutAlign="space-between center">
+						<div fxFlex="32"
+							 fxFlex.sm="100"
+							 fxFlex.xs="100"
+							 class="row-wrap-margins">
+							<mat-form-field>
+								<mat-label>Name</mat-label>
+								<input matInput
+									   type="text"
+									   formControlName="name"
+									   minlength="3"
+									   maxlength="24"
+									   required>
+							</mat-form-field>
+						</div>
+						<div fxFlex="32"
+							 fxFlex.sm="100"
+							 fxFlex.xs="100"
+							 class="row-wrap-margins">
+							<mat-form-field>
+								<mat-label>Email</mat-label>
+								<input matInput
+									   type="text"
+									   formControlName="email"
+									   required>
+							</mat-form-field>
+						</div>
+						<div fxFlex="32"
+							 fxFlex.sm="100"
+							 fxFlex.xs="100"
+							 class="row-wrap-margins">
+							<mat-form-field>
+								<mat-label>Role</mat-label>
+								<input matInput
+									   type="text"
+									   formControlName="role"
+									   required>
+							</mat-form-field>
+						</div>
+					</div>
+				</form>
+
+				<div *ngIf="isChangingPassword"
+					 fxLayout="row wrap"
+					 fxLayoutAlign="space-between center">
+					<div fxFlex="100"
+						 class="top-heading"
+						 style="font-weight: bold;margin-top: 20px;margin-bottom: 10px;">
+						<span class="header-top-text-bolder">
+							Change Password
+						</span>
+					</div>
+				</div>
+
+				<div *ngIf="isChangingPassword"
+					 fxLayout="row wrap"
+					 fxLayoutAlign="space-between center">
+					<div fxFlex="32"
+						 fxFlex.sm="100"
+						 fxFlex.xs="100"
+						 class="row-wrap-margins">
+						<mat-form-field>
+							<mat-label>Current Password</mat-label>
+							<input matInput
+								   type="password"
+								   formControlName="currentPassword"
+								   minlength="6"
+								   maxlength="14"
+								   required>
+							<mat-error *ngIf="getField('currentPassword')">{{getErrorMessage('currentPassword')}}
+							</mat-error>
+						</mat-form-field>
+					</div>
+					<div fxFlex="32"
+						 fxFlex.sm="100"
+						 fxFlex.xs="100"
+						 class="row-wrap-margins">
+						<mat-form-field>
+							<mat-label>New Password</mat-label>
+							<input matInput
+								   type="password"
+								   formControlName="newPassword"
+								   minlength="6"
+								   maxlength="14"
+								   required>
+							<mat-error *ngIf="getField('newPassword')">{{getErrorMessage('newPassword')}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div fxFlex="32"
+						 fxFlex.sm="100"
+						 fxFlex.xs="100"
+						 class="row-wrap-margins">
+						<mat-form-field>
+							<mat-label>Confirm Password</mat-label>
+							<input matInput
+								   type="password"
+								   formControlName="confirmPassword"
+								   required>
+							<!-- <mat-error *ngIf="getField('confirmPassword')">{{getErrorMessage('confirmPassword')}}</mat-error> -->
+							<mat-error *ngIf="getField('confirmPassword')">
+								Confirm password mismatch.</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+
+	</div>
+	<!-- <app-form-footer [save]="returnFirstWord(title)"></app-form-footer> -->
+
+	<div *ngIf="isChangingPassword"
+		 fxLayout="row wrap"
+		 fxLayoutAlign="end center"
+		 fxLayoutGap="5px"
+		 style="margin-top: 15px;height:100px">
+
+		<div fxFlex="150px">
+			<button type="submit"
+					mat-button
+					class="btn-custom-form">
+				Update
+			</button>
+		</div>
+		<div fxFlex="150px">
+			<button type="button"
+					mat-button
+					(click)="onCancel()"
+					class="btn-custom-form">
+				Cancel
+			</button>
+		</div>
+	</div>
+</form>

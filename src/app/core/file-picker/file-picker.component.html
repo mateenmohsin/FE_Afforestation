@@ -1,0 +1,67 @@
+<div fxLayout="row wrap"
+     fxLayoutAlign="start center"
+     style="margin-bottom: 20px;">
+
+     <div fxFlex.xs="15"
+          fxFlex="120px"
+          fxFlexOffset="2">
+
+          <img [style.height.px]="size.height"
+               [style.width.px]="size.width"
+               style="border-radius: 50%;border: 1px solid black"
+               *ngIf="onlyImage"
+               [src]="image" />
+
+          <ng-container *ngIf="!onlyImage">
+               <div class="my-drop-zone"
+                    [style.height.px]="size.height"
+                    [style.width.px]="size.width">
+
+                    <div class="fileContainer"
+                         (mouseover)="onHover('over')"
+                         (mouseleave)="onHover('out')"
+                         [style.height.px]="size.height"
+                         [style.width.px]="size.width">
+
+                         <ng-container *ngIf="!image">
+                              <div *ngIf="!isIconHidden"
+                                   class="cloud-icon">
+                                   <mat-icon>cloud_upload</mat-icon>
+                              </div>
+
+                              <div class="des"
+                                   *ngIf="isIconHidden">{{description}}</div>
+                         </ng-container>
+
+                         <input type="file"
+                                id="avatar"
+                                accept="image/png, image/jpeg, image/jpg"
+                                (change)="onFileChange($event)"
+                                #fileInput />
+
+                         <ng-container *ngIf="!onlyImage">
+                         <div *ngIf="image"
+                              class="selected-img">
+                              <img [style.height.px]="size.height"
+                                   [style.width.px]="size.width"
+                                   [src]="image">
+                              <div *ngIf="isDeleteShown"
+                                   class="delete"
+                                   (click)="onDeleteImage()">
+                                   <mat-icon>delete</mat-icon>
+                              </div>
+                         </div>
+                         </ng-container>
+
+                    </div>
+               </div>
+          </ng-container>
+     </div>
+
+     <div style="font-weight: bold;"
+          fxFlex
+          fxFlex.sm="100"
+          fxFlex.xs="100">
+          {{label}}
+     </div>
+</div>

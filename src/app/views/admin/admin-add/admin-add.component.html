@@ -1,0 +1,68 @@
+<app-top-heading [title]="title"></app-top-heading>
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="start center">
+		<div fxFlex>
+			<mat-card class="p-30">
+				<!-- <app-image-row [label]="label"
+							   [imageUrl]="imageUrl"></app-image-row> -->
+
+				<file-picker [label]="label"
+							 [onlyImage]="onlyImage"
+							 [image]="getImage('profilePicture')"
+							 controlName="profilePicture"
+							 (onFileSelect)="onFileSelect($event)"
+							 (onDeleteFile)="onDeleteFile($event)">
+				</file-picker>
+
+				<div fxLayout="row wrap"
+					 fxLayoutAlign="start center"
+					 fxLayoutGap.lg="15px">
+					<div fxFlex>
+						<mat-form-field>
+							<mat-label>Name</mat-label>
+							<input matInput
+								   type="text"
+								   formControlName="name"
+								   minlength="3"
+								   maxlength="24"
+								   required>
+							<mat-error *ngIf="getField('name')">{{getErrorMessage('name')}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div fxFlex>
+						<mat-form-field>
+							<mat-label>Email</mat-label>
+							<input matInput
+								   type="text"
+								   formControlName="email"
+								   required>
+							<mat-error *ngIf="getField('email')">{{getErrorMessage('email')}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxLayout="row wrap"
+					 fxLayoutAlign="start center"
+					 fxLayoutGap="5px"
+					 class="row-wrap-margins">
+					<div fxFlex="50">
+						<mat-form-field>
+							<mat-label>Password</mat-label>
+							<input matInput
+								   type="password"
+								   formControlName="password"
+								   minlength="6"
+								   maxlength="14" >
+							<mat-error *ngIf="getField('password')">{{getErrorMessage('password')}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</mat-card>
+		</div>
+
+	</div>
+	<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+
+
+</form>

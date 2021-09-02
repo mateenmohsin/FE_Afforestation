@@ -1,0 +1,129 @@
+<div fxLayout="row wrap"
+     style="margin-bottom: 20px;"
+     fxLayoutAlign="space-between center">
+      <div fxFlex
+           class="top-heading"
+           style="font-weight: bold;">
+            <span class="header-top-text-bolder">
+                  Inventory Report
+            </span>
+      </div>
+      <div>
+            <div class="date-head">
+                  {{reportData?.nurseryName}}&nbsp;&nbsp;&nbsp;&nbsp;
+                  {{(reportData?.date?.startDateTime * 1000) | date: 'dd/MM/yyyy'}} -
+                  {{(reportData?.date?.endDateTime * 1000) | date: 'dd/MM/yyyy'}}
+            </div>
+      </div>
+</div>
+
+<mat-card>
+      <div *ngIf="reportData.inventoryType != 'fixed'"
+           style="padding: 10px 40px 40px 40px;">
+            <div fxLayout="row wrap"
+                 fxLayoutAlign="start center"
+                 fxLayoutGap="10px">
+
+                  <div fxFlex>
+                        <card [count]="inventoryReportKpi?.saplingsStock"
+                              [hasImage]="'true'"
+                              [heading]="'Saplings Count'"
+                              [icon]="'sapling.svg'"
+                              [colortype]="'#242F68'"
+                              [imgHeight]="'45px'">
+
+                        </card>
+                  </div>
+                  <div fxFlex>
+                        <card [count]="inventoryReportKpi?.samplingStockIn"
+                              [hasImage]="'true'"
+                              [heading]="'Available Stock'"
+                              [icon]="'Solid-1.svg'"
+                              [colortype]="'#2C77FF'"
+                              [imgHeight]="'45px'">
+
+                        </card>
+                  </div>
+                  <div fxFlex>
+                        <card [count]="inventoryReportKpi?.samplingStockOut"
+                              [hasImage]="'true'"
+                              [heading]="'Issued Stock'"
+                              [icon]="'Solid.svg'"
+                              [colortype]="'#242F68'"
+                              [imgHeight]="'45px'">
+                        </card>
+                  </div>
+            </div>
+            <div style="margin-top: 10px;"
+                 fxLayout="row wrap"
+                 fxLayoutAlign="start center"
+                 fxLayoutGap="10px">
+                  <div fxFlex>
+                        <card [count]="inventoryReportKpi?.totalSpcies"
+                              [hasImage]="'true'"
+                              [heading]="'Species Count'"
+                              [icon]="'plant (2).svg'"
+                              [colortype]="'#2C77FF'"
+                              [imgHeight]="'45px'">
+
+                        </card>
+                  </div>
+
+                  <div fxFlex>
+                        <card [count]="inventoryReportKpi?.seedStockIn"
+                              [hasImage]="'true'"
+                              [heading]="'Seed Stock (Kg)'"
+                              [icon]="'sesame.svg'"
+                              [colortype]="'#242F68'"
+                              [imgHeight]="'45px'">
+
+                        </card>
+                  </div>
+                  <div fxFlex>
+                        <card [count]="inventoryReportKpi?.cuttingStockIn"
+                              [hasImage]="'true'"
+                              [heading]="'Cutting Stock'"
+                              [icon]="'rice.svg'"
+                              [colortype]="'#2C77FF'"
+                              [imgHeight]="'45px'">
+
+                        </card>
+                  </div>
+            </div>
+      </div>
+
+      <div style="padding: 10px 40px 40px 40px;"
+           *ngIf="reportData.inventoryType == 'fixed'">
+            <div style="margin-top: 10px;"
+                 fxLayout="row wrap"
+                 fxLayoutAlign="start center"
+                 fxLayoutGap="10px">
+                  <div fxFlex="25"
+                       fxFlex.sm="100"
+                       fxFlex.xs="100">
+                        <card [count]="inventoryReportKpi?.soilStockIn"
+                              [hasImage]="'true'"
+                              [heading]="'Soil Stock (Kg)'"
+                              [icon]="'soil.svg'"
+                              [colortype]="'#242F68'"
+                              [imgHeight]="'45px'">
+
+                        </card>
+                  </div>
+                  <div fxFlex="25"
+                       fxFlex.sm="100"
+                       fxFlex.xs="100">
+                        <card [count]="inventoryReportKpi?.plasticStockIn"
+                              [hasImage]="'true'"
+                              [heading]="'Plastics Stock (Kg)'"
+                              [icon]="'Page-1.svg'"
+                              [colortype]="'#2C77FF'"
+                              [imgHeight]="'45px'">
+                        </card>
+                  </div>
+            </div>
+      </div>
+
+      <app-table-component (onPagination)="onPagination($event)"
+                           [props]="tableConfigAndProps"></app-table-component>
+</mat-card>

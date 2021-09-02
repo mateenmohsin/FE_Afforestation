@@ -1,0 +1,18 @@
+<div fxLayout="row wrap"
+     fxLayoutAlign="space-between center">
+    <div fxFlex="100"
+         class="top-heading"
+         style="font-weight: bold;">
+        <button style="position: relative;top: -4px"
+                *ngIf="showBack"
+                mat-icon-button
+                (click)="goback()">
+            <mat-icon class="mat-18">
+                arrow_back
+            </mat-icon>
+        </button>
+        <span class="header-top-text-bolder">
+            {{title}}
+        </span>
+    </div>
+</div>

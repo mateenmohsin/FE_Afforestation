@@ -1,0 +1,337 @@
+<app-top-heading [title]="title"></app-top-heading>
+
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+
+	<ng-container *ngIf="inventoryType == 'consumable'">
+		<mat-card class="p-30">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start center"
+				 class="row-wrap-margins">
+				<mat-form-field fxFlex="25">
+					<mat-label>Nursery</mat-label>
+					<mat-select style="height:40px !important"
+								formControlName="nurseryId">
+						<mat-option *ngFor="let option of nurseries"
+									[value]="option?.value">
+							{{option?.label}}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="getField('nurseryId')">{{getErrorMessage('nurseryId')}}</mat-error>
+				</mat-form-field>
+			</div>
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start start"
+				 fxLayoutGap="15px">
+				<div fxFlex="25"
+					 *ngIf="title != 'Add Consumable Inventory'"
+					 class="row-wrap-margins">
+					<mat-form-field>
+						<mat-label>Sapling ID</mat-label>
+						<input matInput
+							   type="text"
+							   formControlName="id"
+							   required>
+					</mat-form-field>
+				</div>
+				<div fxFlex="25"
+					 class="row-wrap-margins">
+					<mat-form-field>
+						<mat-label>Species</mat-label>
+						<mat-select style="height:40px !important"
+									formControlName="specieId">
+							<mat-option *ngFor="let option of species"
+										[value]="option?.value">
+								{{option?.label}}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="getField('specieId')">{{getErrorMessage('specieId')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="25"
+					 class="row-wrap-margins">
+					<mat-form-field>
+						<mat-label>Type</mat-label>
+						<mat-select (selectionChange)="quantityTypeChanged($event.value)"
+									formControlName="categoryEn"
+									style="height:40px !important">
+							<mat-option value="sapling">Sapling</mat-option>
+							<mat-option value="seed">Seed</mat-option>
+							<mat-option value="cutting">Cutting</mat-option>
+						</mat-select>
+						<mat-error *ngIf="getField('categoryEn')">{{getErrorMessage('categoryEn')}}</mat-error>
+					</mat-form-field>
+				</div>
+
+				<div fxFlex="25"
+					 class="row-wrap-margins">
+					<mat-form-field>
+						<mat-label *ngIf="type == 'new'">Quantity</mat-label>
+						<mat-label *ngIf="type == 'Edit'">Current Quantity</mat-label>
+						<input matInput
+							   type="text"
+							   placeholder="Ex. 12"
+							   formControlName="quantity"
+							   mask="9999999"
+							   [specialCharacters]="[]"
+							   required>
+						<div style="left:2px;top: -2px;position: relative;"
+							 matSuffix> {{quantityType}}</div>
+						<mat-error *ngIf="getField('quantity')">{{getErrorMessage('quantity')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div *ngIf="type == 'Edit'" fxFlex="25"
+					 class="row-wrap-margins">
+					<mat-form-field>
+						<mat-label>Subtract Quantity</mat-label>
+						<input matInput
+							   type="text"
+							   placeholder="Ex. 12"
+							   formControlName="newQuantity"
+							   mask="9999999"
+							   [specialCharacters]="[]"
+							   required>
+						<div style="left:2px;top: -2px;position: relative;"
+							 matSuffix> {{quantityType}}</div>
+						<mat-error *ngIf="getField('newQuantity')">
+							Must be less than Quantity
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+		</mat-card>
+		<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+	</ng-container>
+</form>
+
+
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+	<ng-container *ngIf="inventoryType == 'fixed'">
+		<mat-card class="p-30">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start center">
+				<mat-form-field fxFlex="25">
+					<mat-label>Nursery</mat-label>
+					<mat-select style="height:40px !important"
+								formControlName="nurseryId">
+						<mat-option *ngFor="let option of nurseries"
+									[value]="option?.value">
+							{{option?.label}}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="getField('nurseryId')">{{getErrorMessage('nurseryId')}}</mat-error>
+				</mat-form-field>
+			</div>
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="20px"
+				 class="row-wrap-margins">
+				<div fxFlex="25">
+					<mat-form-field>
+						<mat-label>Name</mat-label>
+						<mat-select formControlName="categoryEn"
+									style="height:40px !important">
+							<mat-option value="soil">Soil</mat-option>
+							<mat-option value="plastic">Plastic Bags</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div fxFlex="25">
+					<mat-form-field>
+						<mat-label>Quantity</mat-label>
+						<input type="text"
+							   mask="9999999"
+							   [specialCharacters]="[]"
+							   formControlName="quantity"
+							   matInput>
+						<div style="left:2px;top: -2px;position: relative;"
+							 matSuffix> Kg</div>
+						<mat-error *ngIf="getField('quantity')">{{getErrorMessage('quantity')}}</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+		</mat-card>
+		<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+	</ng-container>
+</form>
+
+
+<!-- <app-top-heading [title]="title"></app-top-heading>
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+	<mat-card fxLayout="row wrap"
+			  fxLayoutAlign="start center"
+			  style="margin-bottom: 20px;">
+		<div style="padding: 15px 15px 0 15px;"
+			 fxFlex="60"
+			 fxFlex.xs="100"
+			 fxLayout="row wrap"
+			 fxLayoutAlign="space-between center">
+			<div fxFlex.xl="48"
+				 fxFlex.lg="48"
+				 fxFlex.md="48"
+				 fxFlex.sm="100"
+				 fxFlex.xs="100">
+				<mat-form-field fxFlex="100">
+					<mat-label>Nursery</mat-label>
+					<mat-select (selectionChange)="onNurseryChange($event.value)"
+								style="height:40px !important"
+								formControlName="nurseryId">
+						<mat-option *ngFor="let option of nurseries"
+									[value]="option?.value">
+							{{option?.label}}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="getField('nurseryId')">{{getErrorMessage('nurseryId')}}</mat-error>
+				</mat-form-field>
+			</div>
+			<div fxFlex.xl="48"
+				 fxFlex.lg="48"
+				 fxFlex.md="48"
+				 fxFlex.sm="100"
+				 fxFlex.xs="100">
+
+				<mat-form-field *ngIf="type == 'new'"
+								fxFlex="100">
+					<mat-label>Inventory Type</mat-label>
+					<mat-select (selectionChange)="inventoryTypeChanged($event.value)"
+								[(ngModel)]="inventoryType"
+								disabled
+								[ngModelOptions]="{standalone: true}"
+								style="height:40px !important">
+						<mat-option value="consumable">Add Consumable Inventory</mat-option>
+						<mat-option value="fixed">Add Fixed Consumable</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div fxFlex="40">
+			<div *ngIf="type != 'new'"
+				 style="margin-bottom: -5px;
+				 text-align: right;
+				 font-weight: bold;
+				 margin-right: 10px;">
+				Current Stock: {{alreadyAddedQuantity}}
+			</div>
+		</div>
+	</mat-card>
+
+	<ng-container *ngIf="inventoryType == 'consumable'">
+		<mat-card class="p-30">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start center">
+				<div class="header-top-text-bold"
+					 fxFlex>
+					Add Inventory
+				</div>
+			</div>
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start start"
+				 fxLayoutGap="15px"
+				 class="row-wrap-margins">
+				<div fxFlex="15"
+					 *ngIf="title != 'Add Inventory'">
+					<mat-form-field>
+						<mat-label>Sapling Id</mat-label>
+						<input matInput
+							   type="text"
+							   formControlName="id"
+							   required
+							   placeholder="Sapling Id">
+						<mat-error *ngIf="getField('specieId')">{{getErrorMessage('specieId')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="30">
+					<mat-form-field fxFlex="100">
+						<mat-label>Species</mat-label>
+						<mat-select (selectionChange)="onSpecieChange($event.value)"
+									style="height:40px !important"
+									formControlName="specieId">
+							<mat-option *ngFor="let option of species"
+										[value]="option?.value">
+								{{option?.label}}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="getField('specieId')">{{getErrorMessage('specieId')}}</mat-error>
+					</mat-form-field>
+				</div>
+				<div fxFlex="25">
+					<mat-form-field fxFlex>
+						<mat-label>
+							Type
+						</mat-label>
+						<mat-select (selectionChange)="quantityTypeChanged($event.value)"
+									formControlName="categoryEn"
+									style="height:40px !important">
+							<mat-option value="sapling">Sapling</mat-option>
+							<mat-option value="seed">Seed</mat-option>
+							<mat-option value="cutting">Cutting</mat-option>
+						</mat-select>
+						<mat-error *ngIf="getField('categoryEn')">{{getErrorMessage('categoryEn')}}</mat-error>
+					</mat-form-field>
+				</div>
+
+				<div fxFlex="25">
+					<mat-form-field>
+						<mat-label *ngIf="id == 'add'">Add Quantity</mat-label>
+						<mat-label *ngIf="id != 'add'">Add More Quantity</mat-label>
+						<input matInput
+							   type="text"
+							   placeholder="Ex. 12"
+							   formControlName="quantity"
+							   mask="999999"
+							   required>
+						<div style="left:2px;top: -2px;position: relative;"
+							 matSuffix> {{quantityType}}</div>
+						<mat-error *ngIf="getField('quantity')">{{getErrorMessage('quantity')}}</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+		</mat-card>
+		<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+	</ng-container>
+</form>
+<form [formGroup]="customForm"
+	  (ngSubmit)="onSubmit()">
+	<ng-container *ngIf="inventoryType == 'fixed'">
+		<mat-card class="p-30">
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start center">
+				<div class="header-top-text-bold"
+					 fxFlex>
+					Add Fixed Inventory
+				</div>
+			</div>
+			<div fxLayout="row wrap"
+				 fxLayoutAlign="start center"
+				 fxLayoutGap="20px"
+				 class="row-wrap-margins">
+				<div fxFlex="25">
+					<mat-form-field fxFlex="100">
+						<mat-label>Name</mat-label>
+						<mat-select formControlName="categoryEn"
+									style="height:40px !important">
+							<mat-option value="soil">Soil</mat-option>
+							<mat-option value="plastic">Plastic</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				<div fxFlex="25">
+					<mat-form-field>
+						<mat-label *ngIf="id == 'add'">Add Quantity</mat-label>
+						<mat-label *ngIf="id != 'add'">Add More Quantity</mat-label>
+						<input type="text"
+							   mask="9999999"
+							   formControlName="quantity"
+							   matInput>
+						<div style="left:2px;top: -2px;position: relative;"
+							 matSuffix> Kg</div>
+						<mat-error *ngIf="getField('quantity')">{{getErrorMessage('quantity')}}</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+		</mat-card>
+		<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+	</ng-container>
+</form> -->

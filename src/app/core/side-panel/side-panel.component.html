@@ -1,0 +1,161 @@
+<!-- <div class="flex-column flex-between"
+	 style="background: #0D1E5C 0% 0% no-repeat padding-box;
+box-shadow: 0px 3px 20px #9AAAFF3C;">
+
+	<div class="logo">
+		<img class="logoImage"
+		style="width: 100%;"
+			 src="assets/images/logo-white.png">
+	</div>
+	<div style="height: calc(100vh - 230px);"
+		 malihu-scrollbar
+		 [scrollbarOptions]="scrollbarOptions">
+		<ng-container *ngFor="let option of panelOptions">
+			<mat-expansion-panel *ngIf="option.children.length > 0"
+								 [expanded]="isChildActive(option)">
+				<mat-expansion-panel-header class="panel-header"
+											style="margin: 20px 10px 20px 0px;"
+											[class.is-active]="isChildActive(option)"
+											collapsedHeight="50px"
+											expandedHeight="50px">
+					<div style="width: 100%;"
+						 fxLayout="row wrap"
+						 fxLayoutAlign="space-between center">
+						<div fxFlex>{{option.title}}</div>
+						<div fxFlex="40px">
+							<mat-icon class="material-icons-outlined">{{option.icon}}</mat-icon>
+						</div>
+					</div>
+				</mat-expansion-panel-header>
+				<mat-list>
+					<mat-list-item *ngFor="let child of option.children"
+								   (click)="onClick(child)"
+								   [routerLink]="child.routerLink"
+								   routerLinkActive="is-active"
+								   [routerLinkActiveOptions]="{exact: true}">
+						<div style="width: 100%;"
+							 fxLayout="row wrap"
+							 fxLayoutAlign="space-between center">
+							<div fxFlex>{{child.title}}</div>
+							<div fxFlex="40px">
+								<mat-icon class="material-icons-outlined">{{child.icon}}</mat-icon>
+							</div>
+						</div>
+					</mat-list-item>
+				</mat-list>
+			</mat-expansion-panel>
+
+			<mat-list style="height: 50px;margin: 20px 10px 20px 0px;"
+					  *ngIf="option.children.length == 0">
+				<mat-list-item [routerLink]="option.routerLink"
+							   [routerLinkActive]="['is-active']">
+
+					<div style="width: 100%;"
+						 fxLayout="row wrap"
+						 fxLayoutAlign="space-between center">
+						<div fxFlex>{{option.title}}</div>
+						<div fxFlex="40px">
+							<mat-icon class="material-icons-outlined">{{option.icon}}</mat-icon>
+						</div>
+					</div>
+				</mat-list-item>
+			</mat-list>
+		</ng-container>
+	</div>
+</div> -->
+
+<aside class="admin-sidebar"
+	   style="background: #0D1E5C 0% 0% no-repeat padding-box;box-shadow: 0px 3px 20px #9AAAFF3C;">
+	<div class="logo">
+		<img style="width: 80%;"
+			 class="logoImage"
+			 src="assets/images/logo-greener.png">
+		<button *ngIf="mode == 'over'"
+				style="position: absolute;top: 10px;right: 0;"
+				mat-icon-button
+				(click)="onMenu()">
+			<mat-icon style="color: white;"
+					  class="mat-18">subject</mat-icon>
+		</button>
+	</div>
+	<div class="admin-sidebar-wrapper"
+		 style="height: calc(100vh - 120px);"
+		 malihu-scrollbar
+		 [scrollbarOptions]="scrollbarOptions">
+		<ul class="menu">
+
+			<li class="menu-item"
+				(click)="onMenuClick(sideMenu, $event)"
+				*ngFor="let sideMenu of menus">
+
+				<mat-accordion displayMode="default"
+							   [multi]="false"
+							   [hideToggle]="false">
+					<mat-expansion-panel (opened)="sideMenu.opened"
+										 (closed)="!sideMenu.opened"
+										 hideToggle>
+						<mat-expansion-panel-header (mouseover)="onHover('over', sideMenu)"
+													(mouseout)="onHover('out', sideMenu)"
+													collapsedHeight="60px"
+													expandedHeight="60px">
+							<a *ngIf="sideMenu.isParent"
+							   class="parent menu-link"
+							   [class.opened]="sideMenu.opened"
+							   routerLinkActive="active">
+								<div class="corner"></div>
+								<span class="menu-label">
+									<span class="menu-name">{{sideMenu.label}}</span>
+								</span>
+								<span class="menu-icon">
+									<!-- <mat-icon style="margin-top: 5px;">{{sideMenu.image}}</mat-icon> -->
+									<img class="filter-color"
+										 style="margin-top: 8px;margin-left: 8px;"
+										 src="assets/images/menu/menu-svg/{{sideMenu.image}}.svg"
+										 width="20px"
+										 height="20px">
+								</span>
+							</a>
+
+							<a *ngIf="!sideMenu.isParent"
+							   class="parent menu-link"
+							   [class.opened]="sideMenu.opened"
+							   [routerLink]="sideMenu.routerLink"
+							   routerLinkActive="active">
+								<div class="corner"></div>
+								<span class="menu-label">
+									<span class="menu-name">{{sideMenu.label}}</span>
+								</span>
+								<span class="menu-icon">
+									<!-- <mat-icon style="margin-top: 5px;">{{sideMenu.image}}</mat-icon> -->
+									<img class="filter-color"
+										 style="margin-top: 8px;margin-left: 8px;"
+										 src="assets/images/menu/menu-svg/{{sideMenu.image}}.svg"
+										 width="20px"
+										 height="20px">
+								</span>
+							</a>
+
+						</mat-expansion-panel-header>
+
+
+						<ul class="sub-menu">
+							<li *ngFor="let childMenu of sideMenu.children"
+								(click)="onChildClick(childMenu, $event)"
+								class="menu-item">
+								<a class="menu-link"
+								   [routerLink]="childMenu.routerLink"
+								   routerLinkActive="active">
+									<span class="menu-label">
+										<span class="menu-name">{{childMenu.label}}</span>
+									</span>
+								</a>
+							</li>
+						</ul>
+
+					</mat-expansion-panel>
+				</mat-accordion>
+
+			</li>
+		</ul>
+	</div>
+</aside>

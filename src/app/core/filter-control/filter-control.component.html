@@ -1,0 +1,144 @@
+<!-- <ng-container *ngIf="filterArray.length == 0">
+	<ng-container *ngIf="placeholder.includes('Search')">
+		<mat-form-field fxFlex>
+			<span matPrefix
+				  style="margin-right: 8px;">
+				<mat-icon style="height: 20px;">search</mat-icon>
+			</span>
+			<mat-label>{{placeholder}}</mat-label>
+			<mat-select style="height:30px !important"
+						(selectionChange)="optionSelected($event.value)">
+				<mat-option *ngFor="let option of options | keyvalue"
+							[value]="option.value">
+					{{option.key}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</ng-container>
+	<ng-container *ngIf="!placeholder.includes('Search')">
+
+		<mat-form-field fxFlex>
+			<span matPrefix
+				  style="margin-right: 8px;">
+				<mat-icon style="height: 20px;">
+					<img src="assets/images/ic_sort.png"
+						 style="margin-bottom: 6px;">
+				</mat-icon>
+			</span>
+			<mat-label>{{placeholder}}</mat-label>
+			<mat-select style="height:30px !important"
+						(selectionChange)="optionSelected($event.value)">
+				<mat-option *ngFor="let option of options1 | keyvalue"
+							[value]="option.value">
+					{{option.key}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</ng-container>
+</ng-container> -->
+
+
+<div fxLayout="row wrap"
+	 fxLayoutAlign="start start"
+	 fxLayoutGap="10px"
+	 fxLayoutGap.sm=""
+	 fxLayoutGap.xs="">
+
+	<ng-container *ngIf="hasSearch">
+		<mat-form-field fxFlex="230px"
+						fxFlex.sm="100"
+						fxFlex.xs="100">
+			<mat-label>{{searchConfig.label}}</mat-label>
+			<input matInput
+				   (keyup)="onSearch()"
+				   type="text"
+				   [(ngModel)]="searchConfig.value">
+		</mat-form-field>
+	</ng-container>
+
+	<ng-container *ngIf="filterArray.length > 0">
+		<ng-container *ngFor="let filter of filterArray">
+			<mat-form-field fxFlex="230px"
+							fxFlex.sm="100"
+							fxFlex.xs="100">
+				<span matPrefix
+					  style="margin-right: 8px;">
+					<mat-icon style="height: 20px;">
+						<!-- <img [src]="getImage(filter)"
+								 style="margin-bottom: 6px;"> -->
+						<span *ngIf="filter.type != 'search'">filter_list</span>
+						<span *ngIf="filter.type == 'search'">search</span>
+					</mat-icon>
+				</span>
+				<mat-label>{{filter.label}}</mat-label>
+				<mat-select [(ngModel)]="filter.selected"
+							style="height:30px !important"
+							(selectionChange)="onChangeFilters()">
+					<mat-option *ngFor="let option of filter.options"
+								[value]="option?.value">
+						{{option?.label}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</ng-container>
+	</ng-container>
+
+	<ng-container *ngIf="hasDatePicker">
+		<form [formGroup]="Form">
+			<mat-form-field fxFlex="270px"
+							fxFlex.sm="100"
+							fxFlex.xs="100">
+				<mat-label>Select Date Range</mat-label>
+				<mat-date-range-input [max]="currentDate"
+									  (click)="FormPicker.open()"
+									  [rangePicker]="FormPicker">
+					<input matStartDate
+						   readonly
+						   (dateChange)="valueChanged2()"
+						   placeholder="Start date"
+						   formControlName="start">
+					<input matEndDate
+						   readonly
+						   (dateChange)="valueChanged2()"
+						   placeholder="End date"
+						   formControlName="end">
+				</mat-date-range-input>
+				<mat-icon style="cursor: pointer;"
+						  *ngIf="Form.get('start').value && Form.get('end').value"
+						  matSuffix
+						  (click)="onClear()">close</mat-icon>
+				<mat-datepicker-toggle matPrefix
+									   [for]="FormPicker"></mat-datepicker-toggle>
+				<mat-date-range-picker (closed)="onClosed()"
+									   #FormPicker></mat-date-range-picker>
+			</mat-form-field>
+		</form>
+	</ng-container>
+
+	<ng-container *ngIf="hasOnlyDate">
+		<form [formGroup]="FormTwo">
+
+			<mat-form-field fxFlex="270px"
+							fxFlex.sm="100"
+							fxFlex.xs="100">
+				<mat-label>Select Date</mat-label>
+				<input matInput
+					   readonly
+					   (click)="picker.open()"
+					   (dateChange)="valueChanged()"
+					   placeholder="Select date"
+					   [min]="minDate"
+					   [max]="currentDate"
+					   formControlName="date"
+					   [matDatepicker]="picker">
+				<mat-icon style="cursor: pointer;"
+						  *ngIf="FormTwo.get('date').value"
+						  matSuffix
+						  (click)="onClear2()">close</mat-icon>
+				<mat-datepicker-toggle matPrefix
+									   [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</form>
+	</ng-container>
+</div>

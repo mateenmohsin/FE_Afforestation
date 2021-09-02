@@ -1,0 +1,170 @@
+<app-top-heading [showBack1]="true"
+                 [title]="'Attendance Detail'"></app-top-heading>
+
+<div class="wrapper">
+    <mat-card style="padding: 30px !important;">
+        <div fxLayout="row wrap"
+             fxLayoutAlign="space-between start">
+            <div fxFlex="60"
+                 fxFlex.sm="100"
+                 fxFlex.xs="100">
+                <div fxLayout="row wrap"
+                     fxLayoutAlign="start start">
+                    <div fxFlex="25">
+                        <div class="nus-heading">
+                            Gardener Name
+                        </div>
+                        <div class="nus-data">
+                            {{gardenerName}}
+                        </div>
+                    </div>
+                    <div fxFlex="25">
+                        <div class="nus-heading">
+                            Nursery
+                        </div>
+                        <div class="nus-data">
+                            {{nurseryName}}
+                        </div>
+                    </div>
+                    <div fxFlex="25">
+                        <div class="nus-heading">
+                            Role
+                        </div>
+                        <div class="nus-data"
+                             style="text-transform: capitalize;">
+                            {{gardenerRole}}
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="heading">
+                    <p>Gardener Name</p>
+                    <p>Nursery</p>
+                    <p>Role</p>
+                </div> -->
+            </div>
+            <div fxFlex="40"
+                 fxFlex.sm="100"
+                 fxFlex.xs="100">
+                <div class="boxes">
+                    <div class="box green">
+                        <p>Total <br> Work Days</p>
+                        <span class="count"><b>{{attendanceKpi?.totalWorkingDays}}</b></span>
+                    </div>
+                    <div class="box red">
+                        <p>Total <br> Absent</p>
+                        <span class="count"><b>{{attendanceKpi?.totalAbsents}}</b></span>
+                    </div>
+                    <div class="box blue">
+                        <p>Total <br> Leaves</p>
+                        <span class="count"><b>{{attendanceKpi?.totalLeaves}}</b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #F8F8F8;margin-top: 20px;margin-bottom: 20px;"
+             fxLayout="row wrap"
+             fxLayoutAlign="space-between start">
+            <div fxFlex="60"
+                 fxFlex.sm="100"
+                 fxFlex.xs="100">
+                <div fxLayout="row wrap"
+                     fxLayoutAlign="center center"
+                     class='month-change'>
+                    <button mat-icon-button
+                            [disabled]="type == 'detail'"
+                            (click)="previousMonth()">
+                        <mat-icon class="mat-18">keyboard_arrow_left</mat-icon>
+                    </button>
+                    <div style="padding: 10px;"><strong>{{date.format('MMMM ')}} {{date.format('YYYY ')}}</strong>
+                    </div>
+                    <button mat-icon-button
+                            [disabled]="disabledNext"
+                            (click)="nextMonth()">
+                        <mat-icon class="mat-18">keyboard_arrow_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div fxFlex="40"
+                 fxFlex.sm="100"
+                 fxFlex.xs="100"></div>
+        </div>
+        <div fxLayout="row wrap"
+             fxLayoutAlign="space-between start">
+            <div fxFlex="60"
+                 fxFlex.sm="100"
+                 fxFlex.xs="100">
+                <div id='calendar-container'>
+                    <div class='flex-container'>
+                        <div *ngFor="let item of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+                             style="margin: 5px;font-weight: bold;"
+                             class='calendar-days flex-container flex-center '>
+                            {{item}}
+                        </div>
+                    </div>
+                    <div class='flex-container'>
+                        <div *ngFor="let day of otherDaysArr">
+                            <div (click)="onClickDate(day)"
+                                 class='calendar-days flex-container'
+                                 style="margin: 5px;"
+                                 [class.boxShadow]="selectedDay == day"
+                                 [class.currentDay]="day.current"
+                                 [class.off]="day.value == 'off'"
+                                 [class.up_coming]="day.value == 'up_coming'"
+                                 [class.leave]="day.value == 'leave'"
+                                 [class.absent]="day.value == 'absent'"
+                                 [class.present]="day.value == 'present'">
+                                {{day.date?.date()}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="40"
+                 fxFlex.sm="100"
+                 fxFlex.xs="100">
+                <div class="selected-date">
+                    <h3>Selected Date</h3>
+                    <ng-container *ngIf="!selectedDay">
+                        <p>Check In time: N/A </p>
+                        <p>Check Out time: N/A </p>
+                    </ng-container>
+
+                    <ng-container *ngIf="selectedDay">
+                        <ng-container *ngIf="selectedDay?.detail?.attendance == 'present'">
+                            <p *ngIf="selectedDay?.detail?.timeIn != 0">Check In time:
+                                {{selectedDay?.detail?.timeIn * 1000 | date : 'hh:mm:ss a'}}
+                            </p>
+                            <p *ngIf="selectedDay?.detail?.timeIn == 0">Check In time: N/A </p>
+
+                            <p *ngIf="selectedDay?.detail?.timeOut != 0">Check Out time:
+                                {{selectedDay?.detail?.timeOut * 1000 | date : 'hh:mm:ss a'}}
+                            </p>
+                            <p *ngIf="selectedDay?.detail?.timeOut == 0">Check Out time: N/A </p>
+                        </ng-container>
+                        <ng-container *ngIf="selectedDay?.detail?.attendance != 'present'">
+                            <p>Check In time: N/A </p>
+                            <p>Check Out time: N/A </p>
+                        </ng-container>
+                    </ng-container>
+
+
+                </div>
+                <div class="legend">
+                    <h3>Legends</h3>
+                    <div style="display: flex;">
+                        <span class="legendbox1"></span><small>Present</small>
+                        <span class="legendbox2"></span><small>Off</small>
+                    </div>
+                    <div style="display: flex;">
+                        <span class="legendbox3"></span><small style="margin-top: 1.2rem;">Absent</small>
+                        <span class="legendbox4"></span><small style="margin-top: 1.2rem;">Up Coming</small>
+                    </div>
+                    <div style="display: flex;">
+                        <span class="legendbox5"></span><small style="margin-top: 1.2rem;">Leaves</small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

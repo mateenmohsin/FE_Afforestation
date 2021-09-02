@@ -1,0 +1,201 @@
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+	<app-top-heading [title]="title"></app-top-heading>
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="start center">
+		<div fxFlex>
+			<mat-card class="p-30">
+				<file-picker [label]="label"
+							 [onlyImage]="onlyImage"
+							 [image]="getImage('profilePicture')"
+							 controlName="profilePicture"
+							 (onFileSelect)="onFileSelect($event)"
+							 (onDeleteFile)="onDeleteFile($event)">
+				</file-picker>
+
+				<div fxLayout="row wrap"
+					 fxLayoutAlign="space-between center"
+					 fxLayoutGap="15px">
+					<div fxFlex>
+						<mat-form-field>
+							<mat-label>Gardener Name</mat-label>
+							<input matInput
+								   type="text"
+								   formControlName="nameEn"
+								   minlength="3"
+								   maxlength="16"
+								   required>
+							<mat-error *ngIf="getField('nameEn')">{{getErrorMessage('nameEn')}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div style="font-weight: bold;"
+						 class="input-rtl"
+						 dir="rtl"
+						 fxFlex>
+						<mat-form-field>
+							<mat-label> باغبان کا نام
+
+							</mat-label>
+							<input matInput
+								   type="text"
+								   formControlName="nameUr"
+								   minlength="3"
+								   maxlength="16"
+								   required>
+							<mat-error *ngIf="getField('nameUr')">{{getErrorMessage('nameUr')}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxLayout="row wrap"
+					 fxLayoutAlign="space center"
+					 fxLayoutGap.lg="15px"
+					 class="row-wrap-margins">
+					<div fxFlex="30">
+						<mat-form-field (click)="desired.open()">
+							<mat-label>Date of Birth</mat-label>
+							<input matInput
+								   readonly
+								   [min]="minDate"
+								   [max]="currentDate"
+								   formControlName="dateOfBirth"
+								   [matDatepicker]="desired">
+							<!-- <mat-datepicker-toggle matPrefix
+												   [for]="desired"></mat-datepicker-toggle> -->
+							<mat-datepicker #desired></mat-datepicker>
+							<mat-error *ngIf="getField('dateOfBirth')">{{getErrorMessage('dateOfBirth')}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div fxFlex="30">
+						<mat-form-field>
+							<mat-label>Gardener Code</mat-label>
+							<input matInput
+								   mask="000-0"
+								   [specialCharacters]="['-']"
+								   prefix="XXXXX-XXXX"
+								   type="text"
+								   formControlName="identityNumber"
+								   required>
+							<!-- <div style="top: -5px;position: relative;left: 5px;"
+								 matPrefix>XXXXX-XXXX</div> -->
+							<mat-error *ngIf="getField('identityNumber')">{{getErrorMessage('identityNumber')}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxLayout="row wrap"
+					 fxLayoutAlign="start center"
+					 fxLayoutGap.lg="15px"
+					 class="row-wrap-margins">
+					<div fxFlex="30">
+						<mat-form-field>
+							<mat-label>Contact No.</mat-label>
+							<input matInput
+								   type="text"
+								   mask="00000000000"
+								   [specialCharacters]="[]"
+								   formControlName="contactNumber"
+								   required>
+							<mat-error *ngIf="getField('contactNumber')">{{getErrorMessage('contactNumber')}}
+							</mat-error>
+						</mat-form-field>
+					</div>
+					<div fxFlex="30">
+						<mat-form-field>
+							<mat-label>Address</mat-label>
+							<input matInput
+								   type="text"
+								   formControlName="address"
+								   minlength="3"
+								   maxlength="60"
+								   required>
+							<mat-error *ngIf="getField('address')">{{getErrorMessage('address')}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div fxLayout="row wrap"
+					 fxLayoutAlign="start center"
+					 fxLayoutGap.lg="15px"
+					 class="row-wrap-margins">
+					<div fxFlex="30">
+						<mat-form-field fxFlex="100">
+							<mat-label *ngIf="id == 'add'">Nursery</mat-label>
+							<mat-label *ngIf="id != 'add'">Select New Nursery</mat-label>
+							<mat-select (selectionChange)="onNurseryChange($event.value)"
+										style="height:40px !important"
+										formControlName="nurseryId">
+								<mat-option *ngFor="let option of nurseries"
+											[value]="option?.value">
+									{{option?.label}}
+								</mat-option>
+							</mat-select>
+							<mat-error *ngIf="getField('nurseryId')">{{getErrorMessage('nurseryId')}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div fxFlex="30" *ngIf="id != 'add'">
+						<mat-form-field fxFlex="100">
+							<mat-label>Current Nursery</mat-label>
+							<mat-select style="height:40px !important"
+										formControlName="currentNursery">
+								<mat-option *ngFor="let option of nurseriesTwo"
+											[value]="option?.value">
+									{{option?.label}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div fxFlex="30">
+						<mat-form-field>
+							<mat-label>Pin Code</mat-label>
+							<input matInput
+								   type="text"
+								   mask="0000"
+								   [specialCharacters]="[]"
+								   formControlName="loginPin"
+								   required>
+							<mat-error *ngIf="getField('loginPin')">{{getErrorMessage('loginPin')}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div fxLayout="row wrap"
+				fxLayoutAlign="start center"
+				fxLayoutGap.lg="15px"
+				class="row-wrap-margins">
+
+		   </div>
+		   <div fxLayout="row wrap"
+				fxLayoutAlign="start center"
+				style="margin-top: 20px;margin-left: 10px;">
+			   <div fxFlex="30">
+				   Work Schedule
+			   </div>
+		   </div>
+		   <div fxLayout="row wrap"
+				fxLayoutAlign="start center"
+				fxLayoutGap="2px"
+				style="margin-top: 20px;margin-left: 10px;">
+			   <div fxFlex
+					*ngFor="let checkbox of checkBoxes">
+				   <mat-checkbox [(ngModel)]="checkbox.checked"
+								 [disabled]="checkBoxDisabled"
+								 [ngModelOptions]="{standalone: true}"
+								 (change)="onCheckBox(checkbox)"
+								 class="example-margin">{{checkbox.day}}</mat-checkbox>
+			   </div>
+			   <div fxFlex>
+				   <mat-checkbox [(ngModel)]="allDays"
+								 [disabled]="checkBoxDisabled"
+								 [ngModelOptions]="{standalone: true}"
+								 (change)="onAllDay()"
+								 class="example-margin">All</mat-checkbox>
+			   </div>
+		   </div>
+
+			</mat-card>
+		</div>
+
+	</div>
+	<app-form-footer [save]="returnFirstWord(title)"></app-form-footer>
+
+
+</form>

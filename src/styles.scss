@@ -1,0 +1,238 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/colors.scss";
+
+// @import "~ng-pick-datetime/assets/style/picker.min.css";
+// @import "assets/styles/indigo-pink.css";
+// @import "~@fortawesome/fontawesome-free/css/all.css";
+
+$font-family: 'Montserrat';
+$font-weight: 600;
+
+html,
+body {
+    font-family: 'Montserrat' !important;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+}
+
+.mat-h1,
+.mat-headline,
+.mat-typography h1 {
+    font-family: 'Montserrat' !important;
+    letter-spacing: normal;
+    margin: 0 0 16px;
+}
+
+
+@import "assets/styles/buttons.scss";
+@import "assets/styles/defaults.scss";
+@import "assets/styles/bootstrap.scss";
+// @import "~@fortawesome/fontawesome-free/css/all.css";
+
+
+.custom-table-striped tbody tr:nth-of-type(odd) {
+    background-color: #F8F8F8 !important;
+}
+
+
+
+.top-heading {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 100;
+}
+
+.btn-custom {
+    background: transparent linear-gradient(259deg, #242F68 0%, #2E4095 100%) 0% 0% no-repeat padding-box;
+    color: #fff;
+    width: 125px;
+    height: 40px;
+    border-radius: 10px !important;
+    font: 500 16px/24px Montserrat;
+}
+
+.btn-custom-form {
+    color: #fff;
+    width: 149px;
+    height: 44px;
+    background: transparent linear-gradient(256deg, #242F68 0%, #2E4095 100%) 0% 0% no-repeat padding-box;
+    border-radius: 50px !important;
+    border-color: #2e4095;
+    opacity: 1;
+}
+
+.btn:focus {
+    box-shadow: none !important;
+}
+
+
+
+.header-top-text-bolder {
+    font: bold bold bold 30px Montserrat;
+}
+
+.header-top-text-bold {
+    font: normal normal normal 24px Montserrat;
+}
+
+.date-head {
+    border: 1px solid lightgray;
+    padding: 7px;
+    width: max-content;
+    background: white;
+    border-radius: 7px;
+    box-shadow: 0px 2px 0px #E4E7E9 !important;
+}
+
+.main-logo-text {
+    font-size: 20px;
+    color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .header-top-text-bolder {
+        font-size: 20px;
+    }
+
+    .top-heading {
+        font-size: 20px;
+    }
+
+    .main-logo-text {
+        font-size: 15px;
+        color: white;
+    }
+
+}
+
+// MATERIAL OLD ====================================
+
+
+// .mat-drawer-inner-container {
+//     width: 100%;
+//     height: 100%;
+//     overflow: hidden !important;
+//     -webkit-overflow-scrolling: touch;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-outline-start {
+//     border-radius: 25px 0 0 25px !important;
+//     border-right-style: none;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-outline-end {
+//     border-radius: 0 25px 25px 0 !important;
+//     border-left-style: none;
+//     flex-grow: 1;
+// }
+
+// .input-rtl {
+//     direction: rtl;
+
+//     .mat-form-field-appearance-outline .mat-form-field-outline-start {
+//         border-radius: 0 25px 25px 0 !important;
+//         border-right-style: none;
+//     }
+
+//     .mat-form-field-appearance-outline .mat-form-field-outline-end {
+//         border-radius: 25px 0 0 25px !important;
+//         border-left-style: none;
+//         flex-grow: 1;
+//     }
+
+//     .mat-form-field-appearance-outline .mat-form-field-infix {
+//         margin-right: 10px !important;
+//         height: 12px;
+//     }
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-infix {
+//     margin-left: 10px !important;
+//     height: 12px;
+// }
+// mat-card {
+//     background: #FFFFFF 0% 0% no-repeat padding-box !important;
+//     box-shadow: 0px 2px 0px #E4E7E9 !important;
+//     border-radius: 10px !important;
+// }
+
+// mat-form-field {
+//     width: 100% !important;
+// }
+
+// .mat-form-field-infix {
+//     padding: 4px 0 11px 0 !important;
+// }
+
+// // .mat-form-field-infix {
+// //     padding: 6px 0 14px 0 !important;
+// // }
+
+// .mat-form-field-label {
+//     font-size: 14px !important;
+// }
+
+// .mat-form-field-label-wrapper {
+//     top: -1.084375em !important;
+//     padding-top: 0.84375em;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-prefix {
+//     top: 5px !important;
+// }
+
+// mat-error {
+//     color: red;
+//     margin-top: 8px;
+// }
+
+
+// .mat-form-field-appearance-outline .mat-form-field-suffix {
+//     position: initial;
+//     top: 5px !important;
+// }
+
+// .mat-form-field-can-float .mat-input-server:focus+.mat-form-field-label-wrapper .mat-form-field-label,
+// .mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+//     transform: translateY(-1.34375em) scale(0.75) !important;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-wrapper {
+//     margin: 0 !important;
+// }
+
+// .mat-form-field-wrapper {
+//     padding-bottom: 1em !important;
+// }
+
+// .mat-sort-header-container {
+//     justify-content: center !important;
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-outline-start,
+// .mat-form-field-appearance-outline .mat-form-field-outline-end {
+//     border: 1px solid currentColor;
+//     min-width: 18px !important;
+// }
+
+// .mat-expansion-panel-body {
+//     padding: 0 !important;
+// }
+
+// mat-card {
+//     padding: 15px !important;
+
+//     &.p-30 {
+//         padding: 30px !important;
+//     }
+// }
+
+// .mat-form-field-appearance-outline .mat-form-field-outline {
+//     height: 40px !important;
+// }

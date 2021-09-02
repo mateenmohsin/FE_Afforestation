@@ -1,0 +1,13 @@
+:ng-deep .mat-drawer-inner-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.main-layout {
+    overflow: auto;
+    padding: 20px;
+    height: calc(100vh - 100px);
+    // padding-bottom: 30px;
+}

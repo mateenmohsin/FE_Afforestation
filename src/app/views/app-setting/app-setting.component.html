@@ -1,0 +1,57 @@
+<form [formGroup]="Form"
+	  (ngSubmit)="onSubmit()">
+	<app-top-heading [title]="title"></app-top-heading>
+
+
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="start center"
+		 fxLayoutGap="5px">
+		<div fxFlex>
+			<mat-card>
+				<div fxLayout="row wrap"
+					 fxLayoutAlign="space-between center"
+					 fxLayoutGap="15px" style="padding: 15px 15px 0 15px;">
+					<div style="font-weight: bold"
+						 fxFlex
+						 class="setting-label-margin">
+						<mat-icon>phone</mat-icon>&nbsp;
+						<div>Technical Support Mobile Number for Head
+							Gardeners</div>
+					</div>
+					<div fxFlex>
+						<mat-form-field>
+							<mat-label>Number</mat-label>
+							<input matInput
+								   type="text"
+								   mask="99999999999"
+								   [specialCharacters]="[]"
+								   formControlName="contactNumber"
+								   required>
+								   <mat-error *ngIf="getField('contactNumber')">Contact Number is invalid</mat-error>
+						</mat-form-field>
+					</div>
+
+				</div>
+			</mat-card>
+		</div>
+
+	</div>
+	<div fxLayout="row wrap"
+		 fxLayoutAlign="end center"
+		 fxLayoutGap="5px"
+		 style="margin-top: 15px;height:100px">
+
+		<div fxFlex="150px">
+			<button type="submit"
+					mat-button
+					class="btn-custom-form">Update</button>
+		</div>
+		<div fxFlex="150px">
+			<button type="button"
+			(click)="goBack()"
+					mat-button
+					class="btn-custom-form">Cancel</button>
+		</div>
+	</div>
+
+</form>
